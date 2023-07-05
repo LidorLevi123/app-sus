@@ -33,7 +33,11 @@ export default {
             if (!this.filterBy) return this.emails
             const regex = new RegExp(this.filterBy.subject, 'i')
             const emails = this.emails.filter(email => regex.test(email.subject))
-            return emails.filter(email => email.isRead)
+
+            if(this.filterBy.isRead === null) return emails
+            if(this.filterBy.isRead) return emails.filter(email => email.isRead)
+            if(!this.filterBy.isRead) return emails.filter(email => !email.isRead)
+            
         }
     },
 
