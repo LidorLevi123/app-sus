@@ -127,6 +127,12 @@ function _createEmails() {
         emails.push(_createEmail('Food'))
         emails.push(_createEmail('Cars'))
         emails.push(_createEmail('Purchase'))
+        emails.push(_createEmail('Steam'))
+        emails.push(_createEmail('Discord'))
+        emails.push(_createEmail('PayPal'))
+        emails.push(_createEmail('Amazon'))
+        emails.push(_createEmail('EA Games'))
+        emails.push(_createEmail('New Movies'))
         utilService.saveToStorage(EMAIL_KEY, emails)
     }
 }

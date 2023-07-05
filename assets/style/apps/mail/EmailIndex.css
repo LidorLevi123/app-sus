@@ -1,12 +1,15 @@
 .email-index {
     display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 50px 1fr;
     gap: 0.5em;
+
+    font-family: sans-serif;
     margin-block-start: 1em;
 }
 
 .email-index > * {
     background-color: #d3d3d3;
     padding: 1em;
+    border-radius: 1em;
 }
