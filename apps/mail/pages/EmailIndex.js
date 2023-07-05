@@ -6,6 +6,15 @@ export default {
 
     template: `
         <section class="email-index main-layout">
+            <button>Compose</button>
+            <input type="text" placeholder="Main Filter Placeholder">
+            <aside>
+                <a href="">Inbox</a> <br>
+                <a href="">Starred</a> <br>
+                <a href="">Sent</a> <br>
+                <a href="">Draft</a> <br>
+                <a href="">Trash</a>
+            </aside>
             <EmailList :emails="emails"/>
         </section>
     `,

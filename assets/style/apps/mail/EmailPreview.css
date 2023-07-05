@@ -1,0 +1,8 @@
+.email-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.email-preview > *:last-child {
+    justify-self: end;
+}

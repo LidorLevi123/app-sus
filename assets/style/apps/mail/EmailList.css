@@ -1,0 +1,12 @@
+.email-list ul {
+    display: grid;
+}
+
+.email-list ul li {
+    padding: 0.6em;
+    background-color: #e5e5e5;
+}
+
+.email-list ul li:not(:last-child) {
+    margin-block-end: 0.6em;
+}

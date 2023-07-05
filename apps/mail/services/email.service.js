@@ -133,7 +133,13 @@ function _createEmails() {
 
 function _createEmail(subject) {
     const email = getEmptyEmail(subject)
+
     email.id = utilService.makeId()
     email.body = utilService.makeLorem(utilService.getRandomIntInclusive(30, 50))
+    email.from = utilService.makeId(4) + '@gmail.com'
+    email.to = loggedinUser.email
+    email.isRead = utilService.getRandomIntInclusive(1, 10) <= 5 ? true : false
+    email.sentAt = new Date(utilService.getRandomIntInclusive(1551133930594, 1875965940594)).getTime()
+
     return email
 }

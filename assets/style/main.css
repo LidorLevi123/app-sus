@@ -19,3 +19,4 @@
 
 /* Email Components */
 @import 'apps/mail/EmailList.css';
+@import 'apps/mail/EmailPreview.css';
