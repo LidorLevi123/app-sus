@@ -3,8 +3,8 @@ import { emailService } from '../services/email.service.js'
 export default {
 
     template: `
-        <section class="email-index">
-
+        <section class="email-index main-layout">
+            <h1>asdasdasd</h1>
         </section>
     `,
 

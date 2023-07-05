@@ -4,12 +4,17 @@ import { storageService } from '../../../services/async-storage.service.js'
 // const PAGE_SIZE = 5
 const EMAIL_KEY = 'emailDB'
 
+const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
+
 var gFilterBy = {}
 var gSortBy = {}
 var gPageIdx
 
 _createEmails()
-// _setemailNextPrevId()
+// _setEmailNextPrevId()
 
 export const emailService = {
     query,
@@ -21,7 +26,9 @@ export const emailService = {
     getFilterBy,
     setFilterBy,
 }
+
 window.emailService = emailService
+window.loggedinUser = loggedinUser
 
 function query() {
     return storageService.query(EMAIL_KEY).then(emails => {
@@ -101,11 +108,11 @@ function _setEmailNextPrevId() {
     query()
         .then(emails => {
             emails.forEach((email, idx) => {
-                if (idx !== emails.length - 1) email.nextemailId = emails[idx + 1].id
-                else email.nextemailId = emails[0].id
+                if (idx !== emails.length - 1) email.nextEmailId = emails[idx + 1].id
+                else email.nextEmailId = emails[0].id
 
-                if (idx !== 0) email.prevemailId = emails[idx - 1].id
-                else email.prevemailId = emails[emails.length - 1].id
+                if (idx !== 0) email.prevEmailId = emails[idx - 1].id
+                else email.prevEmailId = emails[emails.length - 1].id
 
             })
             utilService.saveToStorage(EMAIL_KEY, emails)
