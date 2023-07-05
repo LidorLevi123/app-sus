@@ -76,7 +76,6 @@ function getFilterBy() {
 }
 
 function setFilterBy(filterBy = {}) {
-    console.log(filterBy)
     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
     // if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
     return gFilterBy
@@ -129,6 +128,9 @@ function _createNotes() {
                         { txt: 'Driving license', doneAt: null },
                         { txt: 'Coding power', doneAt: 187111111 }
                     ]
+                },
+                style: {
+                    backgroundColor: utilService.getRandomColor()
                 }
             }
         ]
