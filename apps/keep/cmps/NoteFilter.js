@@ -1,20 +1,27 @@
 export default {
   template: `
   <section class="note-filter">
-    <input type="text" placeholder="Search notes" v-model="filterBy.txt" @input="emitFilter" />
-    <!-- Other filter options -->
+    <h2>Filters:</h2>
+    <input class="search-filter" type="text" placeholder="Search notes" v-model="filterBy.txt" @input="emitFilter" />
+    <select class="select-filter" v-model="filterBy.type" @change="emitFilter">
+      <option value="">All Note Types</option>
+      <option value="NoteTxt">Text Note</option>
+      <option value="NoteImg">Image Note</option>
+      <option value="NoteTodos">Todo Note</option>
+    </select>
   </section>
   `,
   data() {
     return {
       filterBy: {
-        txt: '', // Add other filter properties as needed
+        txt: '',
+        type: '', // Filter by note type
       },
-    };
+    }
   },
   methods: {
     emitFilter() {
-      this.$emit('filter', this.filterBy);
+      this.$emit('filter', this.filterBy)
     },
   },
-};
+}

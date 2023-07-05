@@ -4,7 +4,7 @@ import { storageService } from '../../../services/async-storage.service.js'
 
 const NOTE_KEY = 'noteDB'
 
-var gFilterBy = { txt: '' }
+var gFilterBy = { txt: '', type: '' }
 var gSortBy = { txt: 1 }
 var gPageIdx
 
@@ -24,19 +24,18 @@ export const noteService = {
 window.noteService = noteService
 
 function query() {
-    return storageService.query(NOTE_KEY).then(notes => {
-        if (gFilterBy.txt) {
-            const regex = new RegExp(gFilterBy.txt, 'i')
-            notes = notes.filter(note => regex.test(note.info.title))
-        // } else if (gSortBy.txt !== undefined) {
-        //     notes.sort(
-        //         (c1, c2) => c1.txt.localeCompare(c2.txt) * gSortBy.txt
-        //     )
-        }
-
-        return notes
+    return storageService.query(NOTE_KEY).then((notes) => {
+      if (gFilterBy.txt || gFilterBy.type) {
+        notes = notes.filter((note) => {
+          const txtMatch = !gFilterBy.txt || note.info.txt.toLowerCase().includes(gFilterBy.txt.toLowerCase())
+          const typeMatch = !gFilterBy.type || note.type === gFilterBy.type
+          return txtMatch && typeMatch
+        })
+      }
+  
+      return notes
     })
-}
+  }
 
 function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
@@ -77,9 +76,9 @@ function getFilterBy() {
 
 function setFilterBy(filterBy = {}) {
     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
-    // if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
+    if (filterBy.type !== undefined) gFilterBy.type = filterBy.type
     return gFilterBy
-}
+  }
 
 function getNextNoteId(noteId) {
     return storageService.query(NOTE_KEY).then(notes => {
