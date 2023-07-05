@@ -1,10 +1,12 @@
 import { emailService } from '../services/email.service.js'
 
+import EmailList from '../cmps/EmailList.js'
+
 export default {
 
     template: `
         <section class="email-index main-layout">
-            <h1>asdasdasd</h1>
+            <EmailList :emails="emails"/>
         </section>
     `,
 
@@ -31,6 +33,8 @@ export default {
     },
 
     components: {
-        
-    }
+        EmailList,
+    },
+
+    name: 'EmailIndex'
 }
