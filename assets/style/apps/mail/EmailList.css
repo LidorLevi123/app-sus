@@ -1,5 +1,11 @@
-.email-list ul {
+.email-list .header-list {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-block-end: 0.6em;
+}
+
+.email-list .header-list > *:last-child{
+    justify-self: end;
 }
 
 .email-list ul li {
