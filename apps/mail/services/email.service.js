@@ -1,5 +1,5 @@
-import { utilService } from '../../../services/util.service'
-import { storageService } from '../../../services/async-storage.service'
+import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/async-storage.service.js'
 
 // const PAGE_SIZE = 5
 const EMAIL_KEY = 'emailDB'
