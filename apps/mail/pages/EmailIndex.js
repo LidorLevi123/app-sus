@@ -15,7 +15,8 @@ export default {
                 <a href="">Draft</a> <br>
                 <a href="">Trash</a>
             </aside>
-            <EmailList :emails="emails"/>
+            <RouterView :emails="emails"/>
+            <!-- <EmailList :emails="emails"/> -->
         </section>
     `,
 
@@ -31,10 +32,7 @@ export default {
 
     created() {
         emailService.query()
-            .then(emails => {
-                this.emails = emails
-                console.log(this.emails)
-            })
+            .then(emails => this.emails = emails)
     },
 
     methods: {

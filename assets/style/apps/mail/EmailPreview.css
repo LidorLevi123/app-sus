@@ -5,7 +5,6 @@
     padding: 1.2em;
 
     font-weight: bold;
-    background-color: #e0edff;
 }
 
 .email-preview > *:last-child {
@@ -13,6 +12,6 @@
 }
 
 .email-preview.read {
-    background-color: #cfdbe8;
+    background-color: var(--secondary-clr4);
     font-weight: normal;
 }

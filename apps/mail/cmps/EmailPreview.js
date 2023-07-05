@@ -1,9 +1,10 @@
 import { utilService } from '../../../services/util.service.js'
+import { emailService } from '../services/email.service.js'
 
 export default {
     props: ['email'],
     template: `
-        <article class="email-preview" :class="emailClass">
+        <article @click="onSelectEmail" class="email-preview" :class="emailClass">
             <span>{{ email.from }}</span>
             <span>{{ email.subject }}</span>
             <span>{{ emailDate }}</span>
@@ -23,5 +24,14 @@ export default {
     },
 
     created() {
+
     },
+
+    methods: {
+        onSelectEmail() {
+            this.$router.push(`email/details/${this.email.id}`)
+            if(!this.email.isRead) this.email.isRead = true
+            emailService.save(this.email)
+        }
+    }
 }

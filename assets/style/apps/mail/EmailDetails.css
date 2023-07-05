@@ -1,0 +1,20 @@
+.email-details {
+    background-color: var(--secondary-clr3);
+    width: 100%;
+}
+
+.email-details .actions {
+    background-color: var(--clr1);
+    margin-block-end: 1em;
+}
+
+.email-details h1 {
+    font-size: 2em;
+}
+
+.email-details img {
+    width: 50px;
+    background-color: var(--clr1);
+    padding: 2px;
+    border-radius: 50%;
+}

@@ -1,7 +1,7 @@
 .email-index {
     display: grid;
     grid-template-columns: 150px 1fr;
-    grid-template-rows: 50px 1fr;
+    grid-template-rows: 50px minmax(400px, 1fr);
     gap: 0.5em;
 
     font-family: sans-serif;
@@ -9,7 +9,7 @@
 }
 
 .email-index > * {
-    background-color: #d3d3d3;
+    background-color: var(--clr2);
     padding: 1em;
     border-radius: 1em;
 }
