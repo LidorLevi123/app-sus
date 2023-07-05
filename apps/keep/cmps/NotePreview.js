@@ -2,6 +2,7 @@ import NoteTxt from "./NoteTxt.js"
 import NoteImg from "./NoteImg.js"
 import NoteTodos from "./NoteTodos.js"
 import NoteAdd from "./NoteAdd.js"
+import NoteVideo from "./NoteVideo.js"
 
 export default {
   props: ['note'],
@@ -23,7 +24,8 @@ export default {
     NoteTxt,
     NoteImg,
     NoteTodos,
-    NoteAdd
+    NoteAdd,
+    NoteVideo
   },
   data() {
     return {
@@ -60,6 +62,8 @@ export default {
           return NoteImg
         case 'NoteTodos':
           return NoteTodos
+        case 'NoteVideo':
+          return NoteVideo
         default:
           return null
       }

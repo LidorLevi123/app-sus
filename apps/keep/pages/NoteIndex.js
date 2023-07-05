@@ -3,6 +3,7 @@ import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.servic
 import NotePreview from '../cmps/NotePreview.js'
 import NoteTxt from '../cmps/NoteTxt.js'
 import NoteAdd from '../cmps/NoteAdd.js'
+import NoteVideo from '../cmps/NoteVideo.js'
 import { utilService } from '../../../services/util.service.js'
 import NoteEdit from './NoteEdit.js'
 
@@ -27,7 +28,8 @@ export default {
         NoteTxt,
         NoteEdit,
         NoteFilter,
-        NoteAdd
+        NoteAdd,
+        NoteVideo
     },
     data() {
         return {

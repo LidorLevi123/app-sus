@@ -94,6 +94,19 @@ function _createNotes() {
     if (!notes || !notes.length) {
         notes = [
             {
+                id: 'n105',
+                createdAt: 2323232,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    txt: 'Discuss project timeline and deliverables.',
+                    title: 'very important!'
+                },
+                style: {
+                    backgroundColor: utilService.getRandomColor()
+                }
+            },
+            {
                 id: 'n101',
                 createdAt: 1112222,
                 type: 'NoteTxt',
@@ -132,7 +145,20 @@ function _createNotes() {
                 style: {
                     backgroundColor: utilService.getRandomColor()
                 }
-            }
+            },
+            {
+                id: 'n107',
+                type: 'NoteVideo',
+                isPinned: false,
+                info: {
+                    url: 'https://www.youtube.com/watch?v=5harlhiqleY',
+                    title: 'for today'
+                },
+                style: {
+                    backgroundColor: utilService.getRandomColor()
+                }
+            },
+            
         ]
         utilService.saveToStorage(NOTE_KEY, notes)
     }
