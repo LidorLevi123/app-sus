@@ -14,9 +14,25 @@ export default {
         </section>
     `,
     methods: {
-        onRemoveNote(noteId) {
-            this.$emit('remove', noteId)
-        },
+        deleteNote() {
+            this.$emit('deleteNote', this.note)
+          },
+          changeColor(id, color) {
+            this.$emit('changeColor', id, color)
+          },
+          startEditing(mode) {
+            this.editMode = mode
+            this.editedNote = { ...this.note }
+            this.isEditing = true
+          },
+          saveNote() {
+            this.$emit('saveNote', this.editedNote)
+            this.isEditing = false
+          },
+          showColorPicker(noteId) {
+            const colorPicker = this.$refs.colorPicker
+            colorPicker.click()
+          },
     },
     components: {
         NotePreview,

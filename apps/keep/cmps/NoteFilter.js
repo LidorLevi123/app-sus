@@ -1,30 +1,27 @@
 export default {
-    template: `
-          <section class="note-filter">
-              <input 
-                  v-model="filterBy.txt" 
-                  @input="onSetFilterBy"
-                  type="text" 
-                  placeholder="Search By Title">
-              <input 
-                  v-model="filterBy.price" 
-                  @input="onSetFilterBy"
-                  type="number" 
-                  placeholder="Search By Max Price">
-          </section>
-      `,
-    data() {
-      return {
-        filterBy: {
-          txt: '',
-          price: null,
-        },
-      }
-    },
-    methods: {
-      onSetFilterBy() {
-        this.$emit('filter', this.filterBy)
+  template: `
+  <section class="note-filter">
+    <h2>Filters:</h2>
+    <input class="search-filter" type="text" placeholder="Search notes" v-model="filterBy.txt" @input="emitFilter" />
+    <select class="select-filter" v-model="filterBy.type" @change="emitFilter">
+      <option value="">All Note Types</option>
+      <option value="NoteTxt">Text Note</option>
+      <option value="NoteImg">Image Note</option>
+      <option value="NoteTodos">Todo Note</option>
+    </select>
+  </section>
+  `,
+  data() {
+    return {
+      filterBy: {
+        txt: '',
+        type: '', // Filter by note type
       },
+    }
+  },
+  methods: {
+    emitFilter() {
+      this.$emit('filter', this.filterBy)
     },
-  }
-  
+  },
+}

@@ -4,7 +4,7 @@ import { storageService } from '../../../services/async-storage.service.js'
 
 const NOTE_KEY = 'noteDB'
 
-var gFilterBy = { txt: '' }
+var gFilterBy = { txt: '', type: '' }
 var gSortBy = { txt: 1 }
 var gPageIdx
 
@@ -24,31 +24,18 @@ export const noteService = {
 window.noteService = noteService
 
 function query() {
-    return storageService.query(NOTE_KEY).then(notes => {
-        if (gFilterBy.txt) {
-            const regex = new RegExp(gFilterBy.txt, 'i')
-            notes = notes.filter(note => regex.test(note.txt))
-            // }
-            // if (gFilterBy.minSpeed) {
-            //     cars = cars.filter(car => car.maxSpeed >= gFilterBy.minSpeed)
-            // }
-            // if (gPageIdx !== undefined) {
-            //     const startIdx = gPageIdx * PAGE_SIZE
-            //     cars = cars.slice(startIdx, startIdx + PAGE_SIZE)
-            // }
-            // if (gSortBy.maxSpeed !== undefined) {
-            //     cars.sort(
-            //         (c1, c2) => (c1.maxSpeed - c2.maxSpeed) * gSortBy.maxSpeed
-            //     )
-        // } else if (gSortBy.txt !== undefined) {
-        //     notes.sort(
-        //         (n1, n2) => n1.txt.localeCompare(n2.txt) * gSortBy.txt
-        //     )
-        }
-
-        return notes
+    return storageService.query(NOTE_KEY).then((notes) => {
+      if (gFilterBy.txt || gFilterBy.type) {
+        notes = notes.filter((note) => {
+          const txtMatch = !gFilterBy.txt || note.info.title.toLowerCase().includes(gFilterBy.txt.toLowerCase())
+          const typeMatch = !gFilterBy.type || note.type === gFilterBy.type
+          return txtMatch && typeMatch
+        })
+      }
+  
+      return notes
     })
-}
+  }
 
 function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
@@ -89,9 +76,9 @@ function getFilterBy() {
 
 function setFilterBy(filterBy = {}) {
     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
-    // if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
+    if (filterBy.type !== undefined) gFilterBy.type = filterBy.type
     return gFilterBy
-}
+  }
 
 function getNextNoteId(noteId) {
     return storageService.query(NOTE_KEY).then(notes => {
@@ -101,20 +88,6 @@ function getNextNoteId(noteId) {
     })
 }
 
-// function getCarCountBySpeedMap() {
-//     return storageService.query(NOTE_KEY).then(cars => {
-//         const carCountBySpeedMap = cars.reduce(
-//             (map, car) => {
-//                 if (car.maxSpeed < 120) map.slow++
-//                 else if (car.maxSpeed < 200) map.normal++
-//                 else map.fast++
-//                 return map
-//             },
-//             { slow: 0, normal: 0, fast: 0 }
-//         )
-//         return carCountBySpeedMap
-//     })
-// }
 
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
@@ -125,11 +98,12 @@ function _createNotes() {
                 createdAt: 1112222,
                 type: 'NoteTxt',
                 isPinned: true,
+                info: {
+                    txt: 'Fullstack Me Baby!',
+                    title: 'nuuuuuuuu'
+                },
                 style: {
                     backgroundColor: utilService.getRandomColor()
-                },
-                info: {
-                    txt: 'Fullstack Me Baby!'
                 }
             },
             {
@@ -137,7 +111,7 @@ function _createNotes() {
                 type: 'NoteImg',
                 isPinned: false,
                 info: {
-                    url: 'http://some-img/me',
+                    url: 'https://api.memegen.link/images/buzz/memes/memes_everywhere.gif',
                     title: 'Bobi and Me'
                 },
                 style: {
@@ -154,6 +128,9 @@ function _createNotes() {
                         { txt: 'Driving license', doneAt: null },
                         { txt: 'Coding power', doneAt: 187111111 }
                     ]
+                },
+                style: {
+                    backgroundColor: utilService.getRandomColor()
                 }
             }
         ]

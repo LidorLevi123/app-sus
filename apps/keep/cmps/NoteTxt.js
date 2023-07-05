@@ -1,44 +1,73 @@
-import { noteService } from "../services/note.service.js"
-import { utilService } from "../../../services/util.service.js"
 
 export default {
     props: ['info'],
     template: `
-  <div>
-    <h2>Add Note</h2>
-    <form class="add-note-form">
-      <input type="text" v-model="title" placeholder="Title" class="add-note-input" />
-      <textarea v-model="text" placeholder="Note" rows="4" class="add-note-textarea"></textarea>
-      <button @click.prevent="addNote" class="add-note-button">Save</button>
-    </form>
+  <div class="note-card">
+    <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
+      {{ note.info.title }}
+    </h3>
+    <input
+      v-if="isEditing && editMode === 'title'"
+      type="text"
+      class="edit-input"
+      v-model="editedNote.info.title"
+      @keyup.enter="saveNote"
+      @blur="saveNote"
+    />
+    <p class="note-text" v-if="!isEditing" @click="startEditing('text')">
+      {{ note.info.txt }}
+    </p>
+    <textarea
+      v-if="isEditing && editMode === 'text'"
+      class="edit-input"
+      v-model="editedNote.info.txt"
+      @keyup.enter="saveNote"
+      @blur="saveNote"
+    ></textarea>
+    <button @click="deleteNote" class="delete-button">
+      <span class="material-symbols-outlined">delete</span>
+    </button>
+    <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
+      <span class="material-symbols-outlined">palette</span>
+    </span>
+    <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
+
   </div>
     `,
-    data() {
-        return {
-            title: '',
-            text: '',
-        };
+  props: {
+    note: {
+      type: Object,
+      required: true,
     },
-    methods: {
-        addNote() {
-            const note = {
-                id: '', 
-                type: 'NoteTxt', // Assuming it's a text note
-                isPinned: false,
-                style: {
-                    backgroundColor: utilService.getRandomColor(),
-                },
-                info: {
-                    title: this.title,
-                    txt: this.text,
-                },
-            }
-            noteService.save(note).then(() => {
-                this.$emit('addNote', note)
-                this.title = ''
-                this.text = ''
-            })
-            console.log(note)
-        },
+  },
+  data() {
+    return {
+      isEditing: false,
+      editMode: '',
+      editedNote: null,
     }
+  },
+  methods: {
+    deleteNote() {
+      this.$emit('deleteNote', this.note)
+    },
+    changeColor(id, color) {
+      this.$emit('changeColor', id, color)
+    },
+    startEditing(mode) {
+      console.log(mode)
+      this.editMode = mode
+      this.editedNote = { ...this.note }
+      console.log(this.editedNote)
+      this.isEditing = true
+    },
+    saveNote() {
+      noteService.save(this.editedNote)
+      this.isEditing = false
+    },
+    showColorPicker(noteId) {
+      const colorPicker = this.$refs.colorPicker
+      colorPicker.click()
+    },
+  }
 }
