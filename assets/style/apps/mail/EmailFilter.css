@@ -1,0 +1,15 @@
+.email-filter {
+    position: relative;
+    display: flex;
+}
+
+.email-filter input {
+    border-radius: 1em;
+    width: 40%;
+}
+
+.email-filter select {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
