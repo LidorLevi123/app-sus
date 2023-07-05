@@ -1,55 +1,29 @@
+import NoteTxt from "./NoteTxt.js"
+import NoteImg from "./NoteImg.js"
+import NoteTodos from "./NoteTodos.js"
+import NoteAdd from "./NoteAdd.js"
 
 export default {
-    props: ['note'],
-    template: `
-  <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
-    <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
-      {{ note.info.title }}
-    </h3>
-    <input
-      v-if="isEditing && editMode === 'title'"
-      type="text"
-      class="edit-input"
-      v-model="editedNote.info.title"
-      @keyup.enter="saveNote"
-      @blur="saveNote"
-    />
-    <p v-if="note.type === 'NoteTxt' && !isEditing" class="note-text" @click="startEditing('text')">
-      {{ note.info.txt }}
-    </p>
-    <textarea
-      v-if="isEditing && editMode === 'text'"
-      class="edit-input"
-      v-model="editedNote.info.txt"
-      @keyup.enter="saveNote"
-      @blur="saveNote"
-    ></textarea>
-    <div v-if="note.type === 'NoteImg' && !isEditing" class="note-img">
-      <img :src="note.info.url" alt="Note Image" />
+  props: ['note'],
+  template: `
+    <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
+      <component
+        :is="getComponent(note.type)"
+        :note="note"
+        @deleteNote="deleteNote"
+        @changeColor="changeColor"
+        @startEditing="startEditing"
+        @saveNote="saveNote"
+        @showColorPicker="showColorPicker"
+      />
+      <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
     </div>
-    <div v-if="note.type === 'NoteTodos' && !isEditing" class="note-todos">
-      <ul>
-        <li v-for="(todo, index) in note.info.todos" :key="index">
-          <input type="checkbox" v-model="todo.doneAt" @change="saveNote" />
-          <span :class="{ 'todo-done': todo.doneAt }">{{ todo.txt }}</span>
-        </li>
-      </ul>
-    </div>
-    <button @click="deleteNote" class="delete-button">
-      <span class="material-symbols-outlined">delete</span>
-    </button>
-    <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
-      <span class="material-symbols-outlined">palette</span>
-    </span>
-    <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
-  </div>
-    `,
-
-props: {
-    note: {
-      type: Object,
-      required: true,
-    },
+  `,
+  components: {
+    NoteTxt,
+    NoteImg,
+    NoteTodos,
+    NoteAdd
   },
   data() {
     return {
@@ -77,6 +51,18 @@ props: {
     showColorPicker(noteId) {
       const colorPicker = this.$refs.colorPicker
       colorPicker.click()
+    },
+    getComponent(type) {
+      switch (type) {
+        case 'NoteTxt':
+          return NoteTxt
+        case 'NoteImg':
+          return NoteImg
+        case 'NoteTodos':
+          return NoteTodos
+        default:
+          return null
+      }
     },
   },
 }

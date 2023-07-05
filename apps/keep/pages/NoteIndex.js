@@ -2,6 +2,7 @@ import { noteService } from '../services/note.service.js'
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
 import NotePreview from '../cmps/NotePreview.js'
 import NoteTxt from '../cmps/NoteTxt.js'
+import NoteAdd from '../cmps/NoteAdd.js'
 import { utilService } from '../../../services/util.service.js'
 import NoteEdit from './NoteEdit.js'
 
@@ -12,12 +13,12 @@ export default {
     template: `
   <div class="note-container">
   <NoteFilter @filter="setFilterBy" />
-      <h2>Notes:</h2>
+  <NoteAdd @addNote="addNote" v-if="!isEditing" />
+  <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
+
     <li v-for="note in notes" :key="note.id">
         <NotePreview :note="note" @deleteNote="deleteNote" @changeColor="changeNoteColor" @editNote="editNote" />
       </li>
-    <NoteTxt @addNote="addNote" v-if="!isEditing" />
-    <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
   </div>
 
     `,
@@ -26,6 +27,7 @@ export default {
         NoteTxt,
         NoteEdit,
         NoteFilter,
+        NoteAdd
     },
     data() {
         return {
@@ -38,7 +40,7 @@ export default {
         }
     },
     created() {
-        this.fetchNotes();
+        this.fetchNotes()
       },
     mounted() {
         this.fetchNotes()
@@ -90,8 +92,8 @@ export default {
             this.editingNote = null
         },
         setFilterBy(filterBy) {
-            noteService.setFilterBy(filterBy);
-            this.filterBy = noteService.getFilterBy();
+            noteService.setFilterBy(filterBy)
+            this.filterBy = noteService.getFilterBy()
             this.fetchNotes()
           },
     },

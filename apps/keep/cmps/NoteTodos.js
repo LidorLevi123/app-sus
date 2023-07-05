@@ -5,6 +5,14 @@ export default {
     <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
       {{ note.info.title }}
     </h3>
+    <input
+      v-if="isEditing && editMode === 'title'"
+      type="text"
+      class="edit-input"
+      v-model="editedNote.info.title"
+      @keyup.enter="saveNote"
+      @blur="saveNote"
+    />
     <ul v-if="!isEditing" class="note-todos-list">
       <li v-for="(todo, index) in note.info.todos" :key="index">
         <label :class="{ 'done-todo': todo.doneAt }" @click="toggleTodoDone(index)">{{ todo.txt }}</label>
@@ -25,6 +33,7 @@ export default {
       required: true,
     },
   },
+
   data() {
     return {
       isEditing: false,
@@ -39,33 +48,20 @@ export default {
     changeColor(id, color) {
       this.$emit('changeColor', id, color)
     },
-    showColorPicker(noteId) {    
-        const colorPicker = this.$refs.colorPicker
-        colorPicker.click()
-      },
-      startEditing(mode) {
-        this.isEditing = true
-        this.editMode = mode
-        this.editedNote = { ...this.note }
-      },
-      cancelEditing() {
-        this.isEditing = false
-        this.editMode = ''
-        this.editedNote = null
-      },
-      saveChanges() {
-        this.isEditing = false
-        this.editMode = ''
-        this.$emit('updateNote', this.editedNote)
-        this.editedNote = null
-      },
-      toggleTodoDone(index) {
-        const todo = this.editedNote.info.todos[index]
-        if (todo.doneAt) {
-          todo.doneAt = null
-        } else {
-          todo.doneAt = new Date().toISOString()
-        }
-      },
+    startEditing(mode) {
+      console.log(mode)
+      this.editMode = mode
+      this.editedNote = { ...this.note }
+      console.log(this.editedNote)
+      this.isEditing = true
     },
+    saveNote() {
+      noteService.save(this.editedNote)
+      this.isEditing = false
+    },
+    showColorPicker(noteId) {
+      const colorPicker = this.$refs.colorPicker
+      colorPicker.click()
+    },
+  }
   }

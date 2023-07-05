@@ -3,7 +3,12 @@
 .note-container {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
     justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
 }
 
 li {

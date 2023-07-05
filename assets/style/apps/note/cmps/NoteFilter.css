@@ -1,6 +1,7 @@
 .note-filter{
     display:grid;
     grid-template-rows: repeat(50px);
+    grid-area: filter;
 }
 
 .search-filter{

@@ -27,7 +27,7 @@ function query() {
     return storageService.query(NOTE_KEY).then((notes) => {
       if (gFilterBy.txt || gFilterBy.type) {
         notes = notes.filter((note) => {
-          const txtMatch = !gFilterBy.txt || note.info.txt.toLowerCase().includes(gFilterBy.txt.toLowerCase())
+          const txtMatch = !gFilterBy.txt || note.info.title.toLowerCase().includes(gFilterBy.txt.toLowerCase())
           const typeMatch = !gFilterBy.type || note.type === gFilterBy.type
           return txtMatch && typeMatch
         })
@@ -98,11 +98,12 @@ function _createNotes() {
                 createdAt: 1112222,
                 type: 'NoteTxt',
                 isPinned: true,
+                info: {
+                    txt: 'Fullstack Me Baby!',
+                    title: 'nuuuuuuuu'
+                },
                 style: {
                     backgroundColor: utilService.getRandomColor()
-                },
-                info: {
-                    txt: 'Fullstack Me Baby!'
                 }
             },
             {

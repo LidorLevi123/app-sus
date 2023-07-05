@@ -1,8 +1,20 @@
+import { noteService } from "../services/note.service.js"
 
 export default {
-    props: ['info'],
-    template: `
+  props: ['info'],
+  template: `
   <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
+  <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
+      {{ note.info.title }}
+    </h3>
+    <input
+      v-if="isEditing && editMode === 'title'"
+      type="text"
+      class="edit-input"
+      v-model="editedNote.info.title"
+      @keyup.enter="saveNote"
+      @blur="saveNote"
+    />
     <img :src="note.info.url" alt="Image Note" class="note-img" />
     <button @click="deleteNote" class="delete-button">
       <span class="material-symbols-outlined">delete</span>
@@ -13,11 +25,18 @@ export default {
     <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
   </div>
     `,
- props: {
+  props: {
     note: {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      isEditing: false,
+      editMode: '',
+      editedNote: null,
+    }
   },
   methods: {
     deleteNote() {
@@ -26,9 +45,20 @@ export default {
     changeColor(id, color) {
       this.$emit('changeColor', id, color)
     },
+    startEditing(mode) {
+      console.log(mode)
+      this.editMode = mode
+      this.editedNote = { ...this.note }
+      console.log(this.editedNote)
+      this.isEditing = true
+    },
+    saveNote() {
+      noteService.save(this.editedNote)
+      this.isEditing = false
+    },
     showColorPicker(noteId) {
       const colorPicker = this.$refs.colorPicker
       colorPicker.click()
     },
-  },
+  }
 }
