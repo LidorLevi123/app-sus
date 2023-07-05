@@ -1,14 +1,10 @@
 .email-preview {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-
+    grid-template-columns: 200px 1fr 60px;
+    column-gap: 5em;
     padding: 1.2em;
 
     font-weight: bold;
-}
-
-.email-preview > *:last-child {
-    justify-self: end;
 }
 
 .email-preview.read {
