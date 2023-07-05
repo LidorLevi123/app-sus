@@ -3,6 +3,7 @@ import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.servic
 import NotePreview from '../cmps/NotePreview.js'
 import NoteTxt from '../cmps/NoteTxt.js'
 import { utilService } from '../../../services/util.service.js'
+import NoteEdit from './NoteEdit.js'
 
 import NoteFilter from '../cmps/NoteFilter.js'
 import NoteList from '../cmps/NoteList.js'
@@ -13,20 +14,24 @@ export default {
     <h2>Notes:</h2>
 
       <li v-for="note in notes" :key="note.id">
-        <NotePreview :note="note" @deleteNote="deleteNote" />
+        <NotePreview :note="note" @deleteNote="deleteNote" @changeColor="changeNoteColor" @editNote="editNote" />
       </li>
 
-    <NoteTxt @addNote="addNote" />
+    <NoteTxt @addNote="addNote" v-if="!isEditing" />
+    <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
   </div>
 
     `,
     components: {
         NotePreview,
         NoteTxt,
+        NoteEdit,
     },
     data() {
         return {
             notes: [],
+            isEditing: false,
+            editingNote: null,
         }
     },
     mounted() {
@@ -37,20 +42,18 @@ export default {
             noteService.query().then((notes) => {
                 this.notes = notes.map((note) => ({
                     ...note,
-                    style: {
-                        backgroundColor: utilService.getRandomColor(),
-                    },
+
                 }))
             })
         },
         addNote(note) {
             noteService.save(note).then(() => {
-                this.loadNotes()
+                this.fetchNotes()
             })
         },
         deleteNote(note) {
             noteService.remove(note.id).then(() => {
-                this.loadNotes()
+                this.fetchNotes()
             })
         },
         changeNoteColor(noteId, color) {
@@ -62,6 +65,23 @@ export default {
                     showSuccessMsg('Note color updated successfully!')
                 })
             }
+            console.log(note)
+        },
+        editNote(note) {
+            this.isEditing = true
+            this.editingNote = note
+        },
+        updateNote(updatedNote) {
+            noteService.save(updatedNote).then(() => {
+                showSuccessMsg('Note updated successfully!')
+                this.isEditing = false
+                this.editingNote = null
+                this.fetchNotes()
+            })
+        },
+        cancelEdit() {
+            this.isEditing = false
+            this.editingNote = null
         },
     },
 }
