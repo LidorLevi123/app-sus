@@ -4,8 +4,8 @@
     border-radius: 4px;
     padding: 10px;
     margin: 10px;
-    width: 200px;
-    min-height: 100px;
+    min-width: 200px;
+    min-height: 200px;
     position: relative;
 }
 
@@ -26,15 +26,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ff5252;
-    color: #ffffff;
+    color: black;
     border: none;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
+
     padding: 0;
     position: absolute;
     top: 8px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.color-span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    border: none;
+
+    padding: 0;
+    position: absolute;
+    top: 68px;
     right: 8px;
     cursor: pointer;
 }

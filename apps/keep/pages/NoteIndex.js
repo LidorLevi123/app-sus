@@ -11,12 +11,11 @@ import NoteList from '../cmps/NoteList.js'
 export default {
     template: `
   <div class="note-container">
-    <h2>Notes:</h2>
-
-      <li v-for="note in notes" :key="note.id">
+  <NoteFilter @filter="setFilterBy" />
+      <h2>Notes:</h2>
+    <li v-for="note in notes" :key="note.id">
         <NotePreview :note="note" @deleteNote="deleteNote" @changeColor="changeNoteColor" @editNote="editNote" />
       </li>
-
     <NoteTxt @addNote="addNote" v-if="!isEditing" />
     <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
   </div>
@@ -26,14 +25,21 @@ export default {
         NotePreview,
         NoteTxt,
         NoteEdit,
+        NoteFilter,
     },
     data() {
         return {
             notes: [],
             isEditing: false,
             editingNote: null,
+            filterBy: {
+                txt: '', // Add other filter properties as needed
+              },
         }
     },
+    created() {
+        this.fetchNotes();
+      },
     mounted() {
         this.fetchNotes()
     },
@@ -83,5 +89,11 @@ export default {
             this.isEditing = false
             this.editingNote = null
         },
+        setFilterBy(filterBy) {
+            noteService.setFilterBy(filterBy);
+            this.filterBy = noteService.getFilterBy();
+            this.fetchNotes()
+          },
     },
+
 }

@@ -27,22 +27,10 @@ function query() {
     return storageService.query(NOTE_KEY).then(notes => {
         if (gFilterBy.txt) {
             const regex = new RegExp(gFilterBy.txt, 'i')
-            notes = notes.filter(note => regex.test(note.txt))
-            // }
-            // if (gFilterBy.minSpeed) {
-            //     cars = cars.filter(car => car.maxSpeed >= gFilterBy.minSpeed)
-            // }
-            // if (gPageIdx !== undefined) {
-            //     const startIdx = gPageIdx * PAGE_SIZE
-            //     cars = cars.slice(startIdx, startIdx + PAGE_SIZE)
-            // }
-            // if (gSortBy.maxSpeed !== undefined) {
-            //     cars.sort(
-            //         (c1, c2) => (c1.maxSpeed - c2.maxSpeed) * gSortBy.maxSpeed
-            //     )
+            notes = notes.filter(note => regex.test(note.info.title))
         // } else if (gSortBy.txt !== undefined) {
         //     notes.sort(
-        //         (n1, n2) => n1.txt.localeCompare(n2.txt) * gSortBy.txt
+        //         (c1, c2) => c1.txt.localeCompare(c2.txt) * gSortBy.txt
         //     )
         }
 
@@ -88,6 +76,7 @@ function getFilterBy() {
 }
 
 function setFilterBy(filterBy = {}) {
+    console.log(filterBy)
     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
     // if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
     return gFilterBy
@@ -101,20 +90,6 @@ function getNextNoteId(noteId) {
     })
 }
 
-// function getCarCountBySpeedMap() {
-//     return storageService.query(NOTE_KEY).then(cars => {
-//         const carCountBySpeedMap = cars.reduce(
-//             (map, car) => {
-//                 if (car.maxSpeed < 120) map.slow++
-//                 else if (car.maxSpeed < 200) map.normal++
-//                 else map.fast++
-//                 return map
-//             },
-//             { slow: 0, normal: 0, fast: 0 }
-//         )
-//         return carCountBySpeedMap
-//     })
-// }
 
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
@@ -137,7 +112,7 @@ function _createNotes() {
                 type: 'NoteImg',
                 isPinned: false,
                 info: {
-                    url: 'http://some-img/me',
+                    url: 'https://api.memegen.link/images/buzz/memes/memes_everywhere.gif',
                     title: 'Bobi and Me'
                 },
                 style: {
