@@ -16,11 +16,11 @@
 
 /* Apps-Email */
 @import 'apps/mail/EmailIndex.css';
-
 @import 'apps/mail/EmailList.css';
 @import 'apps/mail/EmailPreview.css';
 @import 'apps/mail/EmailDetails.css';
 @import 'apps/mail/EmailFilter.css';
+@import 'apps/mail/EmailFolderList.css';
 
 /* Apps-Notes */
 @import 'apps/note/NoteIndex.css';

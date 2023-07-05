@@ -2,6 +2,7 @@ import { emailService } from '../services/email.service.js'
 
 import EmailList from '../cmps/EmailList.js'
 import EmailFilter from '../cmps/EmailFilter.js'
+import EmailFolderList from '../cmps/EmailFolderList.js'
 
 export default {
 
@@ -10,13 +11,7 @@ export default {
             <button>🖊 Compose</button>
             <!-- <input type="text" placeholder="Main Filter Placeholder"> -->
             <EmailFilter @filter="setFilterBy"/>
-            <aside>
-                <a href="">Inbox</a> <br>
-                <a href="">Starred</a> <br>
-                <a href="">Sent</a> <br>
-                <a href="">Draft</a> <br>
-                <a href="">Trash</a>
-            </aside>
+            <EmailFolderList />
             <RouterView :emails="filteredEmails"/>
         </section>
     `,
@@ -55,6 +50,7 @@ export default {
     components: {
         EmailList,
         EmailFilter,
+        EmailFolderList
     },
 
     name: 'EmailIndex'

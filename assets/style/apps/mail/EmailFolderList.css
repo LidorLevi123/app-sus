@@ -1,0 +1,22 @@
+.email-folder-list ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 1em 0.5em;
+    border-radius: 1em;
+    transition: .2s;
+}
+
+.email-folder-list ul li span{
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.email-folder-list ul li h4{
+    margin: 0;
+}
+
+.email-folder-list ul li:hover {
+    background-color: var(--secondary-clr3);
+}
