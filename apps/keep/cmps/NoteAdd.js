@@ -4,29 +4,31 @@ import { utilService } from "../../../services/util.service.js"
 export default {
     props: ['info'],
     template: `
-  <div>
-
-    <form class="add-note-form">
+<form class="add-note-form">
+  <div class="input-wrapper">
+    <div class="input-container">
       <input type="text" v-model="title" placeholder="Write your mind" class="add-note-input" />
-      <textarea v-if="isTextNote" v-model="text" placeholder="Note" rows="4" class="add-note-textarea"></textarea>
-      <input v-if="isImgNote" type="text" v-model="imgUrl" placeholder="Image URL" class="add-note-input" />
-      <input v-if="isVideoNote" type="text" v-model="videoUrl" placeholder="YouTube Video URL" class="add-note-input" />
-      <div v-if="isTodosNote" class="todos-input">
-        <div v-for="(todo, index) in todos" :key="index">
-          <input type="checkbox" v-model="todo.done" />
-          <input type="text" v-model="todo.txt" class="todos-input-line" placeholder="Todo line" />
-        </div>
-        <button @click.prevent="addTodo" class="add-todo-button">Add Todo</button>
+      <button @click.prevent="addNote" class="add-note-button"><span class="material-symbols-outlined">save</span></button>
+
+      <div class="button-group">
+        <button @click.prevent="setNoteType('text')" class="note-type-button"><span class="material-symbols-outlined">article</span></button>
+        <button @click.prevent="setNoteType('img')" class="note-type-button"><span class="material-symbols-outlined">image</span></button>
+        <button @click.prevent="setNoteType('video')" class="note-type-button"><span class="material-symbols-outlined">smart_display</span></button>
+        <button @click.prevent="setNoteType('todos')" class="note-type-button"><span class="material-symbols-outlined">format_list_bulleted_add</span></button>
       </div>
-      <div class="note-type-buttons">
-        <button @click.prevent="setNoteType('text')" class="note-type-button">Text Note</button>
-        <button @click.prevent="setNoteType('img')" class="note-type-button">Image Note</button>
-        <button @click.prevent="setNoteType('video')" class="note-type-button">Video Note</button>
-        <button @click.prevent="setNoteType('todos')" class="note-type-button">Todos Note</button>
-      </div>
-      <button @click.prevent="addNote" class="add-note-button">Save</button>
-    </form>
+    </div>
   </div>
+  <textarea v-if="isTextNote" v-model="text" placeholder="Note" rows="4" class="add-note-textarea"></textarea>
+  <input v-if="isImgNote" type="text" v-model="imgUrl" placeholder="Image URL" class="add-note-input" />
+  <input v-if="isVideoNote" type="text" v-model="videoUrl" placeholder="YouTube Video URL" class="add-note-input" />
+  <div v-if="isTodosNote" class="todos-input">
+    <div v-for="(todo, index) in todos" :key="index">
+      <input type="checkbox" v-model="todo.done" />
+      <input type="text" v-model="todo.txt" class="todos-input-line" placeholder="Todo line" />
+    </div>
+    <button @click.prevent="addTodo" class="add-todo-button"><span class="material-symbols-outlined">add_circle</span></button>
+  </div>
+</form>
     `,
     props: ['info'],
     data() {
