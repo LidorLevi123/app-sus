@@ -65,16 +65,16 @@ export default {
       this.editMode = ''
       this.editedNote = null
     },
-    saveChanges() {
-      this.isEditing = false
-      this.editMode = ''
-      this.$emit('updateNote', this.editedNote)
-      this.editedNote = null
-    },
     toggleTodoDone(index, value) {
       const todo = value
       todo.doneAt = !todo.doneAt ? new Date().toISOString() : null
-      saveChanges()
-    },
-  },
+      noteService.save(this.note)
+        .then(() => {
+          this.$emit('updateNote', this.note)
+        })
+        .catch((error) => {
+          console.error('Failed to save the note:', error)
+        })
+    }
+  }
 }

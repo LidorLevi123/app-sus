@@ -5,6 +5,7 @@ import NoteAdd from "./NoteAdd.js"
 import NoteVideo from "./NoteVideo.js"
 
 export default {
+  name: 'preview',
   props: ['note'],
   template: `
     <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
@@ -75,4 +76,6 @@ export default {
       this.$emit('togglePinNote', this.note)
     }
   },
+
+
 }

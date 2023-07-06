@@ -1,11 +1,14 @@
+import { noteService } from "../services/note.service.js"
 
 export default {
-    props: ['info'],
-    template: `
+  props: ['info'],
+  template: `
 <div class="note-card">
-  <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
-    {{ note.info.title }}
-  </h3>
+
+  <div class="note-title" ref="titleElement" contenteditable spellcheck="false" @keyup="editTitle">
+   {{ note.info.title }}
+
+  </div>
   <input
     v-if="isEditing && editMode === 'title'"
     type="text"
@@ -14,16 +17,11 @@ export default {
     @keyup.enter="saveNote"
     @blur="saveNote"
   />
-  <p class="note-text" v-if="!isEditing" @click="startEditing('text')">
+  <div class="note-text" ref="txtElement" contenteditable spellcheck="false" @keyup="editTxt">
+
     {{ note.info.txt }}
-  </p>
-  <textarea
-    v-if="isEditing && editMode === 'text'"
-    class="edit-input"
-    v-model="editedNote.info.txt"
-    @keyup.enter="saveNote"
-    @blur="saveNote"
-  ></textarea>
+
+    </div>
   <div class="note-toolbar note-toolbar-bottom">
     <button @click="deleteNote" class="delete-button">
       <span class="material-symbols-outlined">delete</span>
@@ -32,6 +30,7 @@ export default {
       <span class="material-symbols-outlined">palette</span>
     </span>
     <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
+
   </div>
 </div>
     `,
@@ -70,5 +69,15 @@ export default {
       const colorPicker = this.$refs.colorPicker
       colorPicker.click()
     },
+    editTitle() {
+      const newTitle = this.$refs.titleElement.innerText.trim()
+      this.note.info.title = newTitle
+      noteService.save(this.note)
+    },
+    editTxt() {
+      const newTxt = this.$refs.txtElement.innerText.trim()
+      this.note.info.txt = newTxt
+      noteService.save(this.note)
+    }
   }
 }
