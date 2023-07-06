@@ -12,7 +12,7 @@
 .search-filter {
     flex-grow: 1;
     max-height: 30px;
-    min-width: 300px;
+    min-width: 200px;
     border-radius: 20px;
 }
 

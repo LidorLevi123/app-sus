@@ -157,6 +157,19 @@ function _createNotes() {
                 style: {
                     backgroundColor: utilService.getRandomColor()
                 }
+            },   
+             {
+                id: 'n111',
+                type: 'NoteMap',
+                isPinned: false,
+                info: {
+                    lat: 32.1416,
+                    lng: 34.831213,
+                    title: 'Pukis house'
+                },
+                style: {
+                    backgroundColor: utilService.getRandomColor()
+                }
             },
             
         ]

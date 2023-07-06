@@ -4,6 +4,7 @@ import NotePreview from '../cmps/NotePreview.js'
 import NoteTxt from '../cmps/NoteTxt.js'
 import NoteAdd from '../cmps/NoteAdd.js'
 import NoteVideo from '../cmps/NoteVideo.js'
+import NoteMap from '../cmps/NoteMap.js'
 import { utilService } from '../../../services/util.service.js'
 import NoteEdit from './NoteEdit.js'
 
@@ -13,11 +14,16 @@ import NoteList from '../cmps/NoteList.js'
 
 export default {
     template: `
-
+<div class="notes-index">
   <div class="inputs">
+    <div class="notes-filter">
+    <RouterView></RouterView>
     <NoteFilter @filter="setFilterBy" />
+    </div>
+    <div class="add-note-section">
     <NoteAdd @addNote="addNote" v-if="!isEditing" />
     <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
+    </div>
   </div>
   <div class="note-container">
     <li v-for="note in filteredNotes" :key="note.id">
@@ -32,7 +38,7 @@ export default {
     </li>
 
   </div>
-
+  </div>
     `,
     components: {
         NotePreview,
@@ -41,6 +47,7 @@ export default {
         NoteFilter,
         NoteAdd,
         NoteVideo,
+        NoteMap
 
     },
     data() {

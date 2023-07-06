@@ -112,4 +112,25 @@
 
 .note-card:hover .note-toolbar {
     opacity: 1;
-  }
+}
+
+.notes-index {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: max-content 1fr;
+    grid-template-areas:
+        'notes-filter add-note-section'
+        'notes-filter notes-container';
+    justify-items: unset;
+}
+
+.filter-controls {
+    grid-area: filter-controls;
+    list-style-type: none;
+    margin-block-start: 1rem;
+}
+
+.add-note-section{
+    grid-area: add-note-section;
+}

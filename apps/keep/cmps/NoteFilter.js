@@ -10,6 +10,7 @@ export default {
         <option value="NoteImg">Image Note</option>
         <option value="NoteTodos">Todo Note</option>
         <option value="NoteVideo">Video Note</option>
+        <option value="NoteMap">Map Note</option>
       </select>
     </div>
   </div>

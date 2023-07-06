@@ -3,9 +3,11 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    align-items: flex-start;
-    width: 90%;
+
+    width: 80%;
     margin: 0 auto;
+    grid-area: note-container;
+    margin-bottom: 40px;
 }
 
 li {

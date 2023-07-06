@@ -6,6 +6,7 @@ import EmailList from './apps/mail/cmps/EmailList.js'
 import EmailDetails from './apps/mail/pages/EmailDetails.js'
 
 import NoteIndex from './apps/keep/pages/NoteIndex.js'
+import NoteDetails from './apps/keep/pages/NoteDetails.js'
 import NoteEdit from './apps/keep/pages/NoteEdit.js'
 
 const { createRouter, createWebHashHistory } = VueRouter
@@ -36,13 +37,15 @@ const routerOptions = {
 			]
 		},
 		{
-            path: '/keep',
-            component: NoteIndex
+            path: '/note',
+            component: NoteIndex,
+			children: [
+				{
+					path: 'details/:noteId',
+					component: NoteDetails,
+				},
+			]
         },
-		{
-			path: '/note/edit/:noteId?',
-			component: NoteEdit,
-		},
 	],
 }
 

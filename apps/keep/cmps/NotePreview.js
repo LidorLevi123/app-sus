@@ -3,13 +3,14 @@ import NoteImg from "./NoteImg.js"
 import NoteTodos from "./NoteTodos.js"
 import NoteAdd from "./NoteAdd.js"
 import NoteVideo from "./NoteVideo.js"
+import NoteMap from "./NoteMap.js"
 
 export default {
   name: 'preview',
   props: ['note'],
   template: `
-
-    <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
+  
+    <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }" @click="$router.push('/note/details/' + note.id)">
       <component
         :is="getComponent(note.type)"
         :note="note"
@@ -27,12 +28,14 @@ export default {
     </div>
 
   `,
+  
   components: {
     NoteTxt,
     NoteImg,
     NoteTodos,
     NoteAdd,
-    NoteVideo
+    NoteVideo,
+    NoteMap
   },
   data() {
     return {
@@ -80,6 +83,8 @@ export default {
           return NoteTodos
         case 'NoteVideo':
           return NoteVideo
+        case 'NoteMap':
+          return NoteMap
         default:
           return null
       }
