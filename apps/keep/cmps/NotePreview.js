@@ -8,6 +8,7 @@ export default {
   name: 'preview',
   props: ['note'],
   template: `
+
     <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
       <component
         :is="getComponent(note.type)"
@@ -17,12 +18,14 @@ export default {
         @startEditing="startEditing"
         @saveNote="saveNote"
         @showColorPicker="showColorPicker"
+        @copyNote="copyNote"
       />
       <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
       <button @click="togglePinNote" class="pin-button">
       <span class="material-symbols-outlined" :class="{ 'pinned-icon': note.isPinned }">push_pin</span>
     </button>
     </div>
+
   `,
   components: {
     NoteTxt,
@@ -36,9 +39,18 @@ export default {
       isEditing: false,
       editMode: '',
       editedNote: null,
+      isModalOpen: false
     }
   },
   methods: {
+    fetchNotes() {
+      noteService.query().then((notes) => {
+        this.notes = notes.map((note) => ({
+          ...note,
+
+        }))
+      })
+    },
     deleteNote() {
       this.$emit('deleteNote', this.note)
     },
@@ -74,8 +86,9 @@ export default {
     },
     togglePinNote() {
       this.$emit('togglePinNote', this.note)
+    },
+    copyNote() {
+      this.$emit('copyNote', this.note)
     }
-  },
-
-
+  }
 }

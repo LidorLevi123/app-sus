@@ -7,11 +7,13 @@ import NoteVideo from '../cmps/NoteVideo.js'
 import { utilService } from '../../../services/util.service.js'
 import NoteEdit from './NoteEdit.js'
 
+
 import NoteFilter from '../cmps/NoteFilter.js'
 import NoteList from '../cmps/NoteList.js'
 
 export default {
     template: `
+
   <div class="inputs">
     <NoteFilter @filter="setFilterBy" />
     <NoteAdd @addNote="addNote" v-if="!isEditing" />
@@ -25,8 +27,10 @@ export default {
         @changeColor="changeNoteColor"
         @editNote="editNote"
         @togglePinNote="togglePinNote"
+        @copyNote="copyNote"
       />
     </li>
+
   </div>
 
     `,
@@ -36,13 +40,16 @@ export default {
         NoteEdit,
         NoteFilter,
         NoteAdd,
-        NoteVideo
+        NoteVideo,
+
     },
     data() {
         return {
             notes: [],
             isEditing: false,
             editingNote: null,
+            isModalOpen: false,
+            selectedNote: null,
             filterBy: {
                 txt: '', // Add other filter properties as needed
             },
@@ -117,7 +124,14 @@ export default {
             noteService.save(note).then(() => {
                 this.fetchNotes()
             })
-        }
-        
+        },
+        copyNote(note) {
+            const copiedNote = JSON.parse(JSON.stringify(note))
+            copiedNote.id = ''
+            noteService.save(copiedNote).then(() => {
+              this.fetchNotes()
+            })
+          }
+
     }
 }

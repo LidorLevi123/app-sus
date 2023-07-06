@@ -32,6 +32,10 @@
     margin-bottom: 10px;
 }
 
+.note-text:focus-visible{
+    outline: none;
+}
+
 .delete-button {
     display: flex;
     align-items: center;
@@ -89,4 +93,17 @@
     left: 0;
     display: flex;
     gap: 8px;
+}
+
+.copy-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    border: none;
+
+    left:50px;
+    background-color: transparent;
+
+    cursor: pointer;
 }

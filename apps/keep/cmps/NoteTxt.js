@@ -23,7 +23,9 @@ export default {
       <span class="material-symbols-outlined">palette</span>
     </span>
     <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
-
+    <button @click="copyNote" class="copy-button">
+    <span class="material-symbols-outlined">file_copy</span>
+  </button>
   </div>
 </div>
     `,
@@ -35,6 +37,7 @@ export default {
   },
   data() {
     return {
+
       isEditing: false,
       editMode: '',
       editedNote: null,
@@ -61,6 +64,11 @@ export default {
       const newTxt = this.$refs.txtElement.innerText.trim()
       this.note.info.txt = newTxt
       noteService.save(this.note)
-    }
+    },
+    copyNote() {
+      this.$emit('copyNote', this.note)
+      
+    },
+
   }
 }

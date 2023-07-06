@@ -22,6 +22,9 @@ export default {
       <span class="material-symbols-outlined">palette</span>
     </span>
     <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
+    <button @click="copyNote" class="copy-button">
+    <span class="material-symbols-outlined">file_copy</span>
+  </button>
   </div>
 </div>
     `,
@@ -64,6 +67,10 @@ export default {
         .catch((error) => {
           console.error('Failed to save the note:', error)
         })
-    }
+    },
+    copyNote() {
+      this.$emit('copyNote', this.note)
+
+    },
   }
 }
