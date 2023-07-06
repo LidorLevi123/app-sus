@@ -12,16 +12,21 @@ import NoteList from '../cmps/NoteList.js'
 
 export default {
     template: `
-    <div class="inputs">
-  <NoteFilter @filter="setFilterBy" />
-  <NoteAdd @addNote="addNote" v-if="!isEditing" />
-  <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
+  <div class="inputs">
+    <NoteFilter @filter="setFilterBy" />
+    <NoteAdd @addNote="addNote" v-if="!isEditing" />
+    <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
   </div>
   <div class="note-container">
-
-    <li v-for="note in notes" :key="note.id">
-        <NotePreview :note="note" @deleteNote="deleteNote" @changeColor="changeNoteColor" @editNote="editNote" />
-      </li>
+    <li v-for="note in filteredNotes" :key="note.id">
+      <NotePreview
+        :note="note"
+        @deleteNote="deleteNote"
+        @changeColor="changeNoteColor"
+        @editNote="editNote"
+        @togglePinNote="togglePinNote"
+      />
+    </li>
   </div>
 
     `,
@@ -40,14 +45,21 @@ export default {
             editingNote: null,
             filterBy: {
                 txt: '', // Add other filter properties as needed
-              },
+            },
         }
     },
     created() {
         this.fetchNotes()
-      },
+    },
     mounted() {
         this.fetchNotes()
+    },
+    computed: {
+        filteredNotes() {
+            const pinnedNotes = this.notes.filter((note) => note.isPinned)
+            const unpinnedNotes = this.notes.filter((note) => !note.isPinned)
+            return [...pinnedNotes, ...unpinnedNotes]
+        }
     },
     methods: {
         fetchNotes() {
@@ -99,7 +111,12 @@ export default {
             noteService.setFilterBy(filterBy)
             this.filterBy = noteService.getFilterBy()
             this.fetchNotes()
-          },
-    },
-
+        },
+        togglePinNote(note) {
+            note.isPinned = !note.isPinned
+            noteService.save(note).then(() => {
+                this.fetchNotes()
+            })
+        }
+    }
 }

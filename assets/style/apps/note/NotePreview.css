@@ -65,3 +65,29 @@
     cursor: pointer;
 }
 
+.pin-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    border: none;
+
+    padding: 0;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.pinned-icon {
+    color: yellow;
+    transform: rotate(45deg);
+}

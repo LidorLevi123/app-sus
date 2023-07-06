@@ -18,6 +18,9 @@ export default {
         @showColorPicker="showColorPicker"
       />
       <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
+      <button @click="togglePinNote" class="pin-button">
+      <span class="material-symbols-outlined" :class="{ 'pinned-icon': note.isPinned }">push_pin</span>
+    </button>
     </div>
   `,
   components: {
@@ -68,5 +71,8 @@ export default {
           return null
       }
     },
+    togglePinNote() {
+      this.$emit('togglePinNote', this.note)
+    }
   },
 }
