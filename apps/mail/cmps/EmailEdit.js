@@ -5,11 +5,11 @@ export default {
      <form @submit.prevent="sendEmail" class="email-edit">
              <header class="title">
                 <h4>New mail</h4>
-                <span class="material-symbols-outlined">close</span>
+                <span @click="closeWindow" class="material-symbols-outlined">close</span>
             </header>
             <input v-model="emailToEdit.to" type="text" placeholder="To">
             <input v-model="emailToEdit.subject" type="text" placeholder="Subject">
-            <input v-model="emailToEdit.body" type="text">
+            <textarea v-model="emailToEdit.body" type="text"></textarea>
             <section class="actions">
                 <button class="btn-send" :disabled="!isValid">Send</button>
                 <span class="material-symbols-outlined">delete</span>
@@ -31,30 +31,35 @@ export default {
     },
 
     created() {
-        // const { emailId } = this.$route.params
+        const { emailId } = this.$route.params
 
-        // if (!emailId) return
-        // emailService.get(emailId)
-        //     .then(email => {
-        //         this.emailToEdit = email
-        //     })
-        //     .catch(err => {
-        //         showErrorMsg('Cannot load email for edit')
-        //         this.$router.push('/email')
-        //     })
+        if (!emailId) return
+        emailService.get(emailId)
+            .then(email => {
+                this.emailToEdit = email
+            })
+            .catch(err => {
+                showErrorMsg('Cannot load email for edit')
+                this.$router.push('/email')
+            })
     },
 
     methods: {
         sendEmail() {
+            this.emailToEdit.category = "sent"
+            this.emailToEdit.sentAt = Date.now()
+            
             emailService.save(this.emailToEdit)
                 .then(savedEmail => {
                     // showSuccessMsg('email sent!')
-                    console.log('Email sent');
-                    this.$emit('emailSent')
+                    this.$emit('closeWindow', savedEmail)
                 })
                 .catch(err => {
                     // showErrorMsg('Cannot save email')
                 })
+        },
+        closeWindow() {
+            this.$emit('closeWindow')
         }
     }
 }

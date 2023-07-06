@@ -13,7 +13,7 @@ export default {
             <!-- <input type="text" placeholder="Main Filter Placeholder"> -->
             <EmailFilter @filter="setFilterBy"/>
             <EmailFolderList @filter="setFilterBy"/>
-            <EmailEdit v-if="isComposeClicked" @emailSent="toggleEmailAddWindow"/>
+            <EmailEdit v-if="isComposeClicked" @closeWindow="toggleEmailAddWindow"/>
             <RouterView :emails="filteredEmails"/>
         </section>
     `,
@@ -49,7 +49,8 @@ export default {
         setFilterBy(filterBy) {
             this.filterBy = filterBy
         },
-        toggleEmailAddWindow() {
+        toggleEmailAddWindow(emailToEdit) {
+            if(emailToEdit) this.emails.unshift(emailToEdit)
             this.isComposeClicked = !this.isComposeClicked
         }
     },

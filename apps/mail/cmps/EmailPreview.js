@@ -5,8 +5,13 @@ export default {
     props: ['email'],
     template: `
         <article @click="onSelectEmail" class="email-preview" :class="emailClass">
-            <span>{{ email.from }}</span>
-            <span>{{ email.subject }}</span>
+            <span>
+                <span class="material-symbols-outlined" v-if="!email.isSelected">check_box_outline_blank</span> 
+                <span class="material-symbols-outlined" v-if="email.isSelected">select_check_box</span>
+                <span class="material-symbols-outlined star">star</span>
+                {{ emailFromTo }}
+            </span>
+            <span>{{ email.subject }} - <span class="email-body">{{ email.body }}</span></span>
             <span>{{ emailDate }}</span>
         </article>
     `,
@@ -20,6 +25,10 @@ export default {
             return {
                 read: this.email.isRead
             }
+        },
+        emailFromTo() {
+            if(this.email.category === 'sent') return 'To: ' + this.email.to
+            return this.email.from
         }
     },
 

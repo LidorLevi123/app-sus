@@ -1,6 +1,8 @@
 .email-filter {
     position: relative;
     display: flex;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0)
 }
 
 .email-filter input {
@@ -9,7 +11,5 @@
 }
 
 .email-filter select {
-    position: absolute;
-    right: 15px;
-    top: 15px;
+    align-self: center;
 }

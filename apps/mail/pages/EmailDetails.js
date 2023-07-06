@@ -5,7 +5,7 @@ export default {
         <section class="email-details main-layout" v-if="email">
 
             <section class="actions">
-                <span class="material-symbols-outlined">arrow_back</span>
+                <span @click="this.$router.push('/email')" class="material-symbols-outlined">arrow_back</span>
             </section>
 
             <h1>{{ email.subject }}</h1>
@@ -17,7 +17,7 @@ export default {
             <!-- <RouterLink :to="'/email/' + email.nextEmailId">Next mail</RouterLink> |
             <RouterLink :to="'/email/' + email.prevEmailId">Prev mail</RouterLink> | -->
             
-            <RouterLink to="/email">Back to mail list</RouterLink>
+            
         </section>
     `,
 
@@ -59,4 +59,5 @@ export default {
             return this.$route.params.emailId
         },
     },
+    
 }
