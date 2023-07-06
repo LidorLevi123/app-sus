@@ -15,17 +15,19 @@ export default {
     />
     <ul v-if="!isEditing" class="note-todos-list">
       <li v-for="(todo, index) in note.info.todos" :key="index">
-        <label :class="{ 'done-todo': todo.doneAt }" @click="toggleTodoDone(index)">{{ todo.txt }}</label>
+        <label :class="{ 'done-todo': todo.doneAt }" @click="toggleTodoDone(index, todo)">
+          <span class="todo-txt">{{ todo.txt }}</span>
+        </label>
       </li>
     </ul>
     <section class="toolbar">
-    <button @click="deleteNote" class="delete-button">
-      <span class="material-symbols-outlined">delete</span>
-    </button>
-    <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
-      <span class="material-symbols-outlined">palette</span>
-    </span>
-    <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
+      <button @click="deleteNote" class="delete-button">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+      <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
+        <span class="material-symbols-outlined">palette</span>
+      </span>
+      <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
     </section>
   </div>
     `,
@@ -35,7 +37,6 @@ export default {
       required: true,
     },
   },
-
   data() {
     return {
       isEditing: false,
@@ -70,14 +71,10 @@ export default {
       this.$emit('updateNote', this.editedNote)
       this.editedNote = null
     },
-    toggleTodoDone(index) {
-      console.log(this.editedNote)
-      const todo = this.editedNote.info.todos[index]
-      if (todo.doneAt) {
-        todo.doneAt = null
-      } else {
-        todo.doneAt = new Date().toISOString()
-      }
+    toggleTodoDone(index, value) {
+      const todo = value
+      todo.doneAt = !todo.doneAt ? new Date().toISOString() : null
+      saveChanges()
     },
   },
 }
