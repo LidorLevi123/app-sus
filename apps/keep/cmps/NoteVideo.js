@@ -15,6 +15,7 @@ export default {
       @blur="saveNote"
     />
 
+    <div class="toolbar">
     <button @click="deleteNote" class="delete-button">
       <span class="material-symbols-outlined">delete</span>
     </button>
@@ -22,6 +23,8 @@ export default {
       <span class="material-symbols-outlined">palette</span>
     </span>
     <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
+    </div>
+  </div>
 
     <div class="video-embed">
       <iframe
@@ -33,7 +36,7 @@ export default {
         allowfullscreen
       ></iframe>
     </div>
-  </div>
+
     `,
     props: {
         note: {
@@ -71,7 +74,6 @@ export default {
             colorPicker.click()
         },
         getYouTubeEmbedUrl(url) {
-            console.log(url)
             const videoId = this.getYouTubeVideoId(url)
             return `https://www.youtube.com/embed/${videoId}`
         },

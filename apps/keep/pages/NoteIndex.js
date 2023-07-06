@@ -12,10 +12,12 @@ import NoteList from '../cmps/NoteList.js'
 
 export default {
     template: `
-  <div class="note-container">
+    <div class="inputs">
   <NoteFilter @filter="setFilterBy" />
   <NoteAdd @addNote="addNote" v-if="!isEditing" />
   <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
+  </div>
+  <div class="note-container">
 
     <li v-for="note in notes" :key="note.id">
         <NotePreview :note="note" @deleteNote="deleteNote" @changeColor="changeNoteColor" @editNote="editNote" />

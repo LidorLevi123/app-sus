@@ -2,6 +2,8 @@
     display:grid;
     grid-template-rows: repeat(50px);
     grid-area: filter;
+    max-width:  300px;
+    margin-bottom: 30px;
 }
 
 .search-filter{

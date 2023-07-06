@@ -1,6 +1,6 @@
 .note-card {
+    position: absolute;
     border-radius: 4px;
-    padding: 4px;
     margin: 10px;
     min-width: 200px;
     min-height: 200px;
@@ -8,6 +8,11 @@
     max-width: 400px;
     grid-area: notes;
     gap: 10px;
+    font-family: Roboto;
+    padding: 12px;
+    margin-bottom: 16px;
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 .note-title {
@@ -59,3 +64,4 @@
     right: 8px;
     cursor: pointer;
 }
+

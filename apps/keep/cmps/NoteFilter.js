@@ -8,6 +8,7 @@ export default {
       <option value="NoteTxt">Text Note</option>
       <option value="NoteImg">Image Note</option>
       <option value="NoteTodos">Todo Note</option>
+      <option value="NoteVideo">Video Note</option>
     </select>
   </section>
   `,
