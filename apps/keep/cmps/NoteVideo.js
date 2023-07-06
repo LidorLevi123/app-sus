@@ -2,7 +2,7 @@
 export default {
   props: ['info'],
   template: `
-<div class="note-card">
+<div>
 <div class="note-title" ref="titleElement" contenteditable spellcheck="false" @keyup="editTitle">
    {{ note.info.title }}
 

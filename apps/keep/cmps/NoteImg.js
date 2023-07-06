@@ -3,7 +3,7 @@ import { noteService } from "../services/note.service.js"
 export default {
   props: ['info'],
   template: `
-  <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
+  <div :style="{ backgroundColor: note.style.backgroundColor }">
   <div class="note-title" ref="titleElement" contenteditable spellcheck="false" @keyup="editTitle">
    {{ note.info.title }}
 

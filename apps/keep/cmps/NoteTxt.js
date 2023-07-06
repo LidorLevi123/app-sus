@@ -3,7 +3,7 @@ import { noteService } from "../services/note.service.js"
 export default {
   props: ['info'],
   template: `
-<div class="note-card">
+<div >
 
   <div class="note-title" ref="titleElement" contenteditable spellcheck="false" @keyup="editTitle">
    {{ note.info.title }}
@@ -15,7 +15,8 @@ export default {
     {{ note.info.txt }}
 
     </div>
-  <div class="note-toolbar note-toolbar-bottom">
+
+  <div class="note-toolbar note-toolbar-bottom" >
     <button @click="deleteNote" class="delete-button">
       <span class="material-symbols-outlined">delete</span>
     </button>
@@ -27,7 +28,9 @@ export default {
     <span class="material-symbols-outlined">file_copy</span>
   </button>
   </div>
+
 </div>
+
     `,
   props: {
     note: {
@@ -67,8 +70,14 @@ export default {
     },
     copyNote() {
       this.$emit('copyNote', this.note)
-      
+
+    },
+    showToolbar() {
+      this.showButtons = true
+    },
+    hideToolbar() {
+      this.showButtons = false
     },
 
-  }
+  },
 }

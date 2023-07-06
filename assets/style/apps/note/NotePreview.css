@@ -1,7 +1,6 @@
 .note-card {
     position: relative;
     border-radius: 4px;
-    margin: 10px;
     min-width: 200px;
     min-height: 200px;
     position: relative;
@@ -13,6 +12,7 @@
     margin-bottom: 16px;
     break-inside: avoid;
     page-break-inside: avoid;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .note-title {
@@ -22,7 +22,7 @@
     color: black;
 }
 
-.note-title:focus-visible{
+.note-title:focus-visible {
     outline: none;
 }
 
@@ -32,7 +32,7 @@
     margin-bottom: 10px;
 }
 
-.note-text:focus-visible{
+.note-text:focus-visible {
     outline: none;
 }
 
@@ -55,7 +55,7 @@
     color: black;
     border: none;
 
-    left:50px;
+    left: 50px;
 
     cursor: pointer;
 }
@@ -93,17 +93,23 @@
     left: 0;
     display: flex;
     gap: 8px;
+    transition: opacity 0.3s;
+    opacity: 0;
 }
 
-.copy-button{
+.copy-button {
     display: flex;
     align-items: center;
     justify-content: center;
     color: black;
     border: none;
 
-    left:50px;
+    left: 50px;
     background-color: transparent;
 
     cursor: pointer;
 }
+
+.note-card:hover .note-toolbar {
+    opacity: 1;
+  }
