@@ -14,7 +14,7 @@ export default {
     computed: {
         emailDate() {
             const emailDate = new Date(this.email.sentAt)
-            return utilService.getMonthName(emailDate) + ' ' + emailDate.getDate()
+            return utilService.getMonthName(emailDate).substring(0,3) + ' ' + utilService.padNum(emailDate.getDate())
         },
         emailClass() {
             return {

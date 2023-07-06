@@ -130,6 +130,7 @@ function _createEmails() {
         emails.push(_createEmail('Steam'))
         emails.push(_createEmail('Discord'))
         emails.push(_createEmail('PayPal'))
+        emails.push(_createEmail('Purchase'))
         emails.push(_createEmail('Amazon'))
         emails.push(_createEmail('EA Games'))
         emails.push(_createEmail('New Movies'))
@@ -146,6 +147,13 @@ function _createEmail(subject) {
     email.to = loggedinUser.email
     email.isRead = utilService.getRandomIntInclusive(1, 10) <= 5 ? true : false
     email.sentAt = new Date(utilService.getRandomIntInclusive(1551133930594, 1875965940594)).getTime()
+
+    const chance = utilService.getRandomIntInclusive(1, 5)
+    if(chance === 1) email.category = 'sent'
+    else if(chance === 2) email.category = 'inbox'
+    else if(chance === 3) email.category = 'starred'
+    else if(chance === 4) email.category = 'draft'
+    else if(chance === 5) email.category = 'trash'
 
     return email
 }

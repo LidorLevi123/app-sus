@@ -1,16 +1,5 @@
 .email-list {
-    background-color: #e0edff;
-}
-
-.email-list .header-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 1.2em;
-    border-block-end: 1px solid black;
-}
-
-.email-list .header-list > *:last-child{
-    justify-self: end;
+    background-color:gray;
 }
 
 .email-list ul li {
@@ -24,5 +13,9 @@
 }
 
 .email-list ul li:hover {
-    color: blue;
+    background-color: var(--secondary-clr9);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgb(102, 93, 93);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }

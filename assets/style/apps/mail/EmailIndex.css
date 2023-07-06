@@ -9,7 +9,7 @@
 }
 
 .email-index > * {
-    background-color: var(--clr2);
+    background-color:var(--secondary-clr7);
     padding: 1em;
     border-radius: 1em;
 }

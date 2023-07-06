@@ -1,0 +1,83 @@
+.email-edit {
+    position: fixed;
+    right: 5px;
+    bottom: 50px;
+    z-index: 1;
+
+    display: grid;
+    grid-template-rows: repeat(3, 50px) 1fr 60px;
+
+    width: 40vw;
+    height: 50vh;
+    padding: 0;
+    background-color: var(--clr2);
+}
+
+.email-edit > * {
+    padding: 0.5em 1em;
+}
+
+.email-edit header {
+    align-self: start;
+    background-color: var(--clr1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+.email-edit header h4 {
+    color: var(--clr3);
+}
+
+.email-edit input, .email-edit input:focus-visible {
+    border: none;
+}
+
+.email-edit input:not(:last-of-type) {
+    border: none;
+    border-bottom: 1px solid #eceff1;
+}
+
+.email-edit .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.email-edit .actions .btn-send {
+    background-color: var(--clr3);
+    color: white;
+    padding: 0.7em;
+    border-radius: 10em;
+    width: 100px;
+}
+
+.email-edit .actions span {
+    position: relative;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.email-edit .actions span::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 0px;
+    height: 0px;
+    background-color: rgb(210, 210, 210);
+    border-radius: 50%;
+    opacity: 0;
+    transition: .3s;
+    z-index: -1;
+}
+
+.email-edit .actions span:hover::before {
+    opacity: 0.7;
+    width: 40px;
+    height: 40px;
+}

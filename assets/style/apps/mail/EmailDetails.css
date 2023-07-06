@@ -1,10 +1,10 @@
 .email-details {
-    background-color: var(--secondary-clr3);
+    background-color:var(--secondary-clr8);
     width: 100%;
 }
 
 .email-details .actions {
-    background-color: var(--clr1);
+    background-color:var(--secondary-clr8);
     margin-block-end: 1em;
 }
 
