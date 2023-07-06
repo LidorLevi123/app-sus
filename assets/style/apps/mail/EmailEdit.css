@@ -11,6 +11,8 @@
     height: 50vh;
     padding: 0;
     background-color: var(--clr2);
+
+    border: 1px solid lightgray;
 }
 
 .email-edit > * {
@@ -31,8 +33,10 @@
 .email-edit header h4 {
     color: var(--clr3);
 }
-
-.email-edit input, .email-edit input:focus-visible {
+.email-edit header span{
+    cursor: pointer;
+}
+.email-edit input, .email-edit textarea {
     border: none;
 }
 

@@ -1,9 +1,14 @@
+.email-folder-list {
+    border: 1px solid rgb(211, 211, 211);
+    padding: 0;
+}
+
 .email-folder-list ul li {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    padding: 1em 0.5em;
+    padding: 1em;
     border-radius: 1em;
     transition: .2s;
 }

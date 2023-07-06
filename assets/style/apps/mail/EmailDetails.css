@@ -1,11 +1,23 @@
 .email-details {
-    background-color:var(--secondary-clr8);
+    background-color:rgb(225, 225, 225);
     width: 100%;
+    padding: 0;
+    
 }
 
 .email-details .actions {
-    background-color:var(--secondary-clr8);
+    background-color:rgba(255, 255, 255, 0.529);
     margin-block-end: 1em;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 1em;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.email-details .actions span {
+    cursor: pointer;
+    font-size: 2em;
 }
 
 .email-details h1 {
