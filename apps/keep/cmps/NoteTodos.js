@@ -2,20 +2,14 @@ export default {
   props: ['info'],
   template: `
 <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
-  <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
-    {{ note.info.title }}
-  </h3>
-  <input
-    v-if="isEditing && editMode === 'title'"
-    type="text"
-    class="edit-input"
-    v-model="editedNote.info.title"
-    @keyup.enter="saveNote"
-    @blur="saveNote"
-  />
+<div class="note-title" ref="titleElement" contenteditable spellcheck="false" @keyup="editTitle">
+   {{ note.info.title }}
+
+  </div>
   <ul v-if="!isEditing" class="note-todos-list">
     <li v-for="(todo, index) in note.info.todos" :key="index">
       <label :class="{ 'done-todo': todo.doneAt }" @click="toggleTodoDone(index, todo)">
+        
         <span class="todo-txt">{{ todo.txt }}</span>
       </label>
     </li>
@@ -55,15 +49,10 @@ export default {
       const colorPicker = this.$refs.colorPicker
       colorPicker.click()
     },
-    startEditing(mode) {
-      this.isEditing = true
-      this.editMode = mode
-      this.editedNote = { ...this.note }
-    },
-    cancelEditing() {
-      this.isEditing = false
-      this.editMode = ''
-      this.editedNote = null
+    editTitle() {
+      const newTitle = this.$refs.titleElement.innerText.trim()
+      this.note.info.title = newTitle
+      noteService.save(this.note)
     },
     toggleTodoDone(index, value) {
       const todo = value

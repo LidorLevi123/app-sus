@@ -9,14 +9,7 @@ export default {
    {{ note.info.title }}
 
   </div>
-  <input
-    v-if="isEditing && editMode === 'title'"
-    type="text"
-    class="edit-input"
-    v-model="editedNote.info.title"
-    @keyup.enter="saveNote"
-    @blur="saveNote"
-  />
+
   <div class="note-text" ref="txtElement" contenteditable spellcheck="false" @keyup="editTxt">
 
     {{ note.info.txt }}
@@ -54,17 +47,7 @@ export default {
     changeColor(id, color) {
       this.$emit('changeColor', id, color)
     },
-    startEditing(mode) {
-      console.log(mode)
-      this.editMode = mode
-      this.editedNote = { ...this.note }
-      console.log(this.editedNote)
-      this.isEditing = true
-    },
-    saveNote() {
-      noteService.save(this.editedNote)
-      this.isEditing = false
-    },
+
     showColorPicker(noteId) {
       const colorPicker = this.$refs.colorPicker
       colorPicker.click()

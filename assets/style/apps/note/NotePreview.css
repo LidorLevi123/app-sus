@@ -22,6 +22,10 @@
     color: black;
 }
 
+.note-title:focus-visible{
+    outline: none;
+}
+
 .note-text {
     color: black;
     font-size: 14px;
