@@ -1,35 +1,35 @@
 export default {
   props: ['info'],
   template: `
-  <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
-    <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
-      {{ note.info.title }}
-    </h3>
-    <input
-      v-if="isEditing && editMode === 'title'"
-      type="text"
-      class="edit-input"
-      v-model="editedNote.info.title"
-      @keyup.enter="saveNote"
-      @blur="saveNote"
-    />
-    <ul v-if="!isEditing" class="note-todos-list">
-      <li v-for="(todo, index) in note.info.todos" :key="index">
-        <label :class="{ 'done-todo': todo.doneAt }" @click="toggleTodoDone(index, todo)">
-          <span class="todo-txt">{{ todo.txt }}</span>
-        </label>
-      </li>
-    </ul>
-    <section class="toolbar">
-      <button @click="deleteNote" class="delete-button">
-        <span class="material-symbols-outlined">delete</span>
-      </button>
-      <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
-        <span class="material-symbols-outlined">palette</span>
-      </span>
-      <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
-    </section>
+<div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
+  <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
+    {{ note.info.title }}
+  </h3>
+  <input
+    v-if="isEditing && editMode === 'title'"
+    type="text"
+    class="edit-input"
+    v-model="editedNote.info.title"
+    @keyup.enter="saveNote"
+    @blur="saveNote"
+  />
+  <ul v-if="!isEditing" class="note-todos-list">
+    <li v-for="(todo, index) in note.info.todos" :key="index">
+      <label :class="{ 'done-todo': todo.doneAt }" @click="toggleTodoDone(index, todo)">
+        <span class="todo-txt">{{ todo.txt }}</span>
+      </label>
+    </li>
+  </ul>
+  <div class="note-toolbar">
+    <button @click="deleteNote" class="delete-button">
+      <span class="material-symbols-outlined">delete</span>
+    </button>
+    <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
+      <span class="material-symbols-outlined">palette</span>
+    </span>
+    <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
   </div>
+</div>
     `,
   props: {
     note: {

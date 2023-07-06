@@ -2,29 +2,29 @@
 export default {
     props: ['info'],
     template: `
-  <div class="note-card">
-    <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
-      {{ note.info.title }}
-    </h3>
-    <input
-      v-if="isEditing && editMode === 'title'"
-      type="text"
-      class="edit-input"
-      v-model="editedNote.info.title"
-      @keyup.enter="saveNote"
-      @blur="saveNote"
-    />
-    <p class="note-text" v-if="!isEditing" @click="startEditing('text')">
-      {{ note.info.txt }}
-    </p>
-    <textarea
-      v-if="isEditing && editMode === 'text'"
-      class="edit-input"
-      v-model="editedNote.info.txt"
-      @keyup.enter="saveNote"
-      @blur="saveNote"
-    ></textarea>
-    <div class="toolbar">
+<div class="note-card">
+  <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
+    {{ note.info.title }}
+  </h3>
+  <input
+    v-if="isEditing && editMode === 'title'"
+    type="text"
+    class="edit-input"
+    v-model="editedNote.info.title"
+    @keyup.enter="saveNote"
+    @blur="saveNote"
+  />
+  <p class="note-text" v-if="!isEditing" @click="startEditing('text')">
+    {{ note.info.txt }}
+  </p>
+  <textarea
+    v-if="isEditing && editMode === 'text'"
+    class="edit-input"
+    v-model="editedNote.info.txt"
+    @keyup.enter="saveNote"
+    @blur="saveNote"
+  ></textarea>
+  <div class="note-toolbar note-toolbar-bottom">
     <button @click="deleteNote" class="delete-button">
       <span class="material-symbols-outlined">delete</span>
     </button>
@@ -32,8 +32,8 @@ export default {
       <span class="material-symbols-outlined">palette</span>
     </span>
     <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
-    </div>
   </div>
+</div>
     `,
   props: {
     note: {

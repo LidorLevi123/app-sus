@@ -4,7 +4,7 @@ export default {
   props: ['info'],
   template: `
   <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }">
-  <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
+    <h3 class="note-title" v-if="!isEditing" @click="startEditing('title')">
       {{ note.info.title }}
     </h3>
     <input
@@ -16,14 +16,14 @@ export default {
       @blur="saveNote"
     />
     <img :src="note.info.url" alt="Image Note" class="note-img" />
-    <div class="toolbar">
-    <button @click="deleteNote" class="delete-button">
-      <span class="material-symbols-outlined">delete</span>
-    </button>
-    <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
-      <span class="material-symbols-outlined">palette</span>
-    </span>
-    <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
+    <div class="note-toolbar">
+      <button @click="deleteNote" class="delete-button">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+      <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
+        <span class="material-symbols-outlined">palette</span>
+      </span>
+      <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
     </div>
   </div>
     `,
