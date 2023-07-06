@@ -1,5 +1,5 @@
 .email-list {
-    background-color: #e0edff;
+    background-color:var(--secondary-clr8);
 }
 
 .email-list .header-list {
@@ -24,5 +24,5 @@
 }
 
 .email-list ul li:hover {
-    color: blue;
+    color: rgb(255, 255, 255);
 }
