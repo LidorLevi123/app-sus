@@ -9,6 +9,7 @@ export default {
             </select>
         </section>
     `,
+
     data() {
         return {
             filterBy: {
@@ -17,6 +18,7 @@ export default {
             }
         }
     },
+    
     watch: {
         filterBy: {
             handler() {

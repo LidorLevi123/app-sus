@@ -1,13 +1,13 @@
 .email-preview {
     display: grid;
-    grid-template-columns: 200px 1fr 60px;
-    column-gap: 5em;
+    grid-template-columns: minmax(100px, 250px) 1fr 60px;
+    column-gap: 2em;
     padding: 1.2em;
 
     font-weight: bold;
 }
 
 .email-preview.read {
-    background-color: #dcd7c7;
+    background-color: #ffffff78;
     font-weight: normal;
 }
