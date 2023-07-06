@@ -22,10 +22,3 @@
 .email-list ul li:last-child {
     border-block-end: none;
 }
-
-.email-list ul li:hover {
-    background-color: var(--secondary-clr9);
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-}

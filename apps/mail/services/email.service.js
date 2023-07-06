@@ -73,12 +73,13 @@ function save(email) {
     }
 }
 
-function getEmptyEmail(subject = '') {
+function getEmptyEmail() {
     return {
         id: '',
-        subject,
+        subject: '',
         body: '',
         isRead: false,
+        isChecked: false,
         sentAt: 0,
         removedAt: null,
         from: '',

@@ -6,8 +6,8 @@ export default {
     template: `
         <article @click="onSelectEmail" class="email-preview" :class="emailClass">
             <span>
-                <span class="material-symbols-outlined" v-if="!email.isSelected">check_box_outline_blank</span> 
-                <span class="material-symbols-outlined" v-if="email.isSelected">select_check_box</span>
+                <span class="material-symbols-outlined" v-if="!isEmailChecked" @click="onCheckEmail">check_box_outline_blank</span> 
+                <span class="material-symbols-outlined" v-if="isEmailChecked" @click="onCheckEmail">select_check_box</span>
                 <span class="material-symbols-outlined star">star</span>
                 {{ emailFromTo }}
             </span>
@@ -23,12 +23,16 @@ export default {
         },
         emailClass() {
             return {
-                read: this.email.isRead
+                read: this.email.isRead,
+                checked: this.email.isChecked
             }
         },
         emailFromTo() {
             if(this.email.category === 'sent') return 'To: ' + this.email.to
             return this.email.from
+        },
+        isEmailChecked() {
+            return this.email.isChecked
         }
     },
 
@@ -41,6 +45,10 @@ export default {
             this.$router.push(`email/details/${this.email.id}`)
             if(!this.email.isRead) this.email.isRead = true
             emailService.save(this.email)
+        },
+        onCheckEmail(ev) {
+            ev.stopPropagation()
+            this.email.isChecked = !this.email.isChecked
         }
     }
 }

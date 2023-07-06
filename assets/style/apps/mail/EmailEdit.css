@@ -31,7 +31,7 @@
 }
 
 .email-edit header h4 {
-    color: var(--clr3);
+    color: var(--secondary-clr5);
 }
 .email-edit header span{
     cursor: pointer;
@@ -52,7 +52,7 @@
 }
 
 .email-edit .actions .btn-send {
-    background-color: var(--clr3);
+    background-color: var(--secondary-clr5);
     color: white;
     padding: 0.7em;
     border-radius: 10em;
