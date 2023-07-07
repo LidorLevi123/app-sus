@@ -1,14 +1,14 @@
 export default {
-    props: ['notes'],
+  props: ['info'],
     template: `
 <div class="note-title" ref="titleElement" contenteditable spellcheck="false" @keyup="editTitle">
    {{ note.info.title }}
 
   </div>
-    <div class="note-content">
+    <div class="note-content" >
       <!-- Display the map here -->
       <div class="map-container">
-        <div class="map" ref="map"></div>
+        <div class="map" ref="map"  ></div>
       </div>
     </div>
     <div class="note-toolbar">
@@ -25,9 +25,15 @@ export default {
     </div>
     `,
     emits: ['deleteNote', 'changeColor', 'startEditing', 'saveNote', 'showColorPicker', 'copyNote'],
-    props: ['note'],
+    props: {
+      note: {
+        type: Object,
+        required: true,
+      },
+    },
     mounted() {
         this.initMap()
+        
     },
 
     methods: {
