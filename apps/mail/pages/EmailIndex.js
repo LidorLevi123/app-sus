@@ -14,7 +14,7 @@ export default {
             <EmailFilter @filter="setFilterBy"/>
             <EmailFolderList @filter="setFilterBy"/>
             <EmailEdit v-if="isComposeClicked" @closeWindow="toggleEmailAddWindow"/>
-            <RouterView :emails="filteredEmails"/>
+            <RouterView @delete="deleteEmail" :emails="filteredEmails"/>
         </section>
     `,
 
@@ -41,13 +41,23 @@ export default {
     },
 
     created() {
-        emailService.query()
-            .then(emails => this.emails = emails)
+        this.loadEmails()
     },
 
     methods: {
+        loadEmails() {
+            emailService.query()
+            .then(emails => this.emails = emails)
+        },
         setFilterBy(filterBy) {
             this.filterBy = filterBy
+        },
+        deleteEmail(email) {
+            if(email.category !== 'trash') {
+                email.category = 'trash'
+                emailService.save(email)
+                return
+            }
         },
         toggleEmailAddWindow(emailToEdit) {
             if(emailToEdit) this.emails.unshift(emailToEdit)

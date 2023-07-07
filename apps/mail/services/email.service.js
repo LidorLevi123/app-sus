@@ -139,7 +139,7 @@ function _createEmail() {
 
 function _addEmailDemoData(email) {
     const companies = [
-        'Google', 'Apple', 'Microsoft', 'Amazon', 'Facebook', 'Twitter', 'LinkedIn', 'Netflix', 'Uber', 
+        'Google', 'Apple', 'Microsoft', 'Amazon', 'Facebook', 'Twitter', 'LinkedIn', 'Netflix', 'Uber',
         'Airbnb', 'Dropbox', 'Slack', 'PayPal', 'Salesforce', 'Adobe', 'Oracle', 'IBM', 'Intel', 'HP', 'Dell'
     ]
     const messages = [
@@ -163,22 +163,22 @@ function _addEmailDemoData(email) {
         'Your subscription is due for renewal. To continue enjoying uninterrupted access to our services, please renew your subscription before the expiration date.',
         'We invite you to participate in a survey to provide your valuable insights. Your feedback is crucial to help us better understand your needs and preferences.',
         'Exciting news! We are thrilled to announce the launch of our new product. Discover the features and benefits it offers by visiting our website.'
-      ]
+    ]
     const subjects = [
         'Important Update', 'Payment Confirmation', 'Event Reminder', 'Account Update', 'Special Offer', 'Order Status',
-        'Webinar Invitation', 'Urgent Request', 'Thank You', 'Policy Update', 'Exclusive Discount', 'Congratulations', 
-        'Application Status', 'New Feature', 'Security Alert', 'Feedback Request', 'Maintenance Notice', 'Subscription Renewal', 
+        'Webinar Invitation', 'Urgent Request', 'Thank You', 'Policy Update', 'Exclusive Discount', 'Congratulations',
+        'Application Status', 'New Feature', 'Security Alert', 'Feedback Request', 'Maintenance Notice', 'Subscription Renewal',
         'Survey Invitation', 'Product Launch'
-      ]
-      
+    ]
+
     const types = ['sent', 'inbox']
     const categories = ['starred', 'draft', 'trash']
 
-    const randomTypeIdx = utilService.getRandomIntInclusive(0, types.length-1)
-    const randomToIdx = utilService.getRandomIntInclusive(0, companies.length-1)
-    const randomFromIdx = utilService.getRandomIntInclusive(0, companies.length-1)
-    const randomSubjectMsgIdx = utilService.getRandomIntInclusive(0, subjects.length-1)
-    const randomCategoryIdx = utilService.getRandomIntInclusive(0, categories.length-1)
+    const randomTypeIdx = utilService.getRandomIntInclusive(0, types.length - 1)
+    const randomToIdx = utilService.getRandomIntInclusive(0, companies.length - 1)
+    const randomFromIdx = utilService.getRandomIntInclusive(0, companies.length - 1)
+    const randomSubjectMsgIdx = utilService.getRandomIntInclusive(0, subjects.length - 1)
+    const randomCategoryIdx = utilService.getRandomIntInclusive(0, categories.length - 1)
 
     email.id = utilService.makeId()
     email.to = companies[randomToIdx]
@@ -188,5 +188,5 @@ function _addEmailDemoData(email) {
     email.type = types[randomTypeIdx]
     email.category = categories[randomCategoryIdx]
     email.isRead = utilService.getRandomIntInclusive(1, 2) === 1 ? true : false
-    email.sentAt = new Date(utilService.getRandomIntInclusive(1551133930594, 1875965940594)).getTime()
+    email.sentAt = new Date(utilService.getRandomIntInclusive(155113393059, 187596594059)).getTime()
 }
