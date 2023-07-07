@@ -11,9 +11,9 @@ export default {
                  :class="emailClass">
 
             <span>
-                <span class="material-symbols-outlined" v-if="!isEmailChecked" @click="onCheckEmail">check_box_outline_blank</span> 
-                <span class="material-symbols-outlined" v-if="isEmailChecked" @click="onCheckEmail">select_check_box</span>
-                <span class="material-symbols-outlined star" @click="onStarEmail">star</span>
+                <span class="material-symbols-outlined" v-if="!isEmailChecked" @click="onCheckEmail" title="Select">check_box_outline_blank</span> 
+                <span class="material-symbols-outlined" v-if="isEmailChecked" @click="onCheckEmail" title="Unselect">select_check_box</span>
+                <span class="material-symbols-outlined star" @click="onStarEmail" title="Mark as Favorite">star</span>
                 {{ emailFromTo }}
             </span>
 
@@ -45,8 +45,8 @@ export default {
                 return month + ' ' + day
             }
 
-            const hour = emailDate.getHours()
-            const minute = emailDate.getMinutes()
+            const hour = emailDate.getHours() < 10 ? '0' + emailDate.getHours() : emailDate.getHours()
+            const minute = emailDate.getMinutes() < 10 ? '0' + emailDate.getMinutes() : emailDate.getMinutes()
             
             return hour + ':' + minute
         },
@@ -58,7 +58,7 @@ export default {
             }
         },
         emailFromTo() {
-            if (this.email.category === 'sent') return 'To: ' + this.email.to
+            if (this.email.type === 'sent') return 'To: ' + this.email.to
             return this.email.from
         },
         isEmailChecked() {

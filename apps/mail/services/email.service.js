@@ -1,7 +1,6 @@
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
-// const PAGE_SIZE = 5
 const EMAIL_KEY = 'emailDB'
 
 const loggedinUser = {
@@ -9,12 +8,8 @@ const loggedinUser = {
     fullname: 'Mahatma Appsus'
 }
 
-var gFilterBy = {}
-var gSortBy = {}
-var gPageIdx
-
-_createEmails()
-// _setEmailNextPrevId()
+_createEmails(20)
+_setEmailsNextPrevId()
 
 export const emailService = {
     query,
@@ -22,39 +17,13 @@ export const emailService = {
     remove,
     save,
     getEmptyEmail,
-    getNextEmailId,
-    getFilterBy,
-    setFilterBy,
 }
 
 window.emailService = emailService
 window.loggedinUser = loggedinUser
 
 function query() {
-    return storageService.query(EMAIL_KEY).then(emails => {
-        // if (gFilterBy.txt) {
-        //     const regex = new RegExp(gFilterBy.txt, 'i')
-        //     emails = emails.filter(email => regex.test(email.vendor))
-        // }
-        // if (gFilterBy.minSpeed) {
-        //     emails = emails.filter(email => email.maxSpeed >= gFilterBy.minSpeed)
-        // }
-        // if (gPageIdx !== undefined) {
-        //     const startIdx = gPageIdx * PAGE_SIZE
-        //     emails = emails.slice(startIdx, startIdx + PAGE_SIZE)
-        // }
-        // if (gSortBy.maxSpeed !== undefined) {
-        //     emails.sort(
-        //         (c1, c2) => (c1.maxSpeed - c2.maxSpeed) * gSortBy.maxSpeed
-        //     )
-        // } else if (gSortBy.vendor !== undefined) {
-        //     emails.sort(
-        //         (c1, c2) => c1.vendor.localeCompare(c2.vendor) * gSortBy.vendor
-        //     )
-        // }
-
-        return emails
-    })
+    return storageService.query(EMAIL_KEY)
 }
 
 function get(emailId) {
@@ -76,6 +45,8 @@ function save(email) {
 function getEmptyEmail() {
     return {
         id: '',
+        type: '',
+        category: '',
         subject: '',
         body: '',
         isRead: false,
@@ -87,25 +58,19 @@ function getEmptyEmail() {
     }
 }
 
-function getFilterBy() {
-    return { ...gFilterBy }
+function _setEmailNextPrevId(email) {
+    return storageService.query(EMAIL_KEY)
+        .then(emails => {
+            const emailIdx = emails.findIndex(currEmail => currEmail.id === email.id)
+            email.nextEmailId = emails[emailIdx + 1] ? emails[emailIdx + 1].id : emails[0].id
+            email.prevEmailId = emails[emailIdx - 1]
+                ? emails[emailIdx - 1].id
+                : emails[emails.length - 1].id
+            return email
+        })
 }
 
-function setFilterBy(filterBy = {}) {
-    if (filterBy.subject !== undefined) gFilterBy.subject = filterBy.subject
-    if (filterBy.isRead !== undefined) gFilterBy.isRead = filterBy.isRead
-    return gFilterBy
-}
-
-function getNextEmailId(emailId) {
-    return storageService.query(EMAIL_KEY).then(emails => {
-        var idx = emails.findIndex(email => email.id === emailId)
-        if (idx === emails.length - 1) idx = -1
-        return emails[idx + 1].id
-    })
-}
-
-function _setEmailNextPrevId() {
+function _setEmailsNextPrevId() {
     query()
         .then(emails => {
             emails.forEach((email, idx) => {
@@ -114,17 +79,16 @@ function _setEmailNextPrevId() {
 
                 if (idx !== 0) email.prevEmailId = emails[idx - 1].id
                 else email.prevEmailId = emails[emails.length - 1].id
-
             })
             utilService.saveToStorage(EMAIL_KEY, emails)
         })
 }
 
-function _createEmails() {
+function _createEmails(amount) {
     let emails = utilService.loadFromStorage(EMAIL_KEY)
     if (!emails || !emails.length) {
         emails = []
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < amount; i++) {
             emails.push(_createEmail())
         }
         utilService.saveToStorage(EMAIL_KEY, emails)
@@ -188,5 +152,5 @@ function _addEmailDemoData(email) {
     email.type = types[randomTypeIdx]
     email.category = categories[randomCategoryIdx]
     email.isRead = utilService.getRandomIntInclusive(1, 2) === 1 ? true : false
-    email.sentAt = new Date(utilService.getRandomIntInclusive(155113393059, 187596594059)).getTime()
+    email.sentAt = new Date(utilService.getRandomIntInclusive(new Date('2020').getTime(), new Date('2023').getTime())).getTime()
 }
