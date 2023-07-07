@@ -140,7 +140,11 @@ function _createNotes() {
                     title: 'Get my stuff together',
                     todos: [
                         { txt: 'Driving license', doneAt: null },
-                        { txt: 'Coding power', doneAt: 187111111 }
+                        { txt: 'Coding power', doneAt: 187111111 },
+                        { txt: 'pick up the cat from school', doneAt: 197111111 },
+                        { txt: 'throw the trash to the garbage ', doneAt: null },
+                        { txt: 'dentist call the', doneAt: 297111111 },
+                        { txt: 'very funny joke HAHA', doneAt: null },
                     ]
                 },
                 style: {
