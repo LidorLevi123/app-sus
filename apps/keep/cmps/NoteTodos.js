@@ -8,7 +8,7 @@ export default {
   </div>
   <ul v-if="!isEditing" class="note-todos-list">
     <li v-for="(todo, index) in note.info.todos" :key="index">
-      <label :class="{ 'done-todo': todo.doneAt }" @click="toggleTodoDone(index, todo)">
+      <label :class="{ 'done-todo': todo.doneAt }" @click="toggleTodoDone(index, todo)" @click.stop>
         
         <span class="todo-txt">{{ todo.txt }}</span>
       </label>
