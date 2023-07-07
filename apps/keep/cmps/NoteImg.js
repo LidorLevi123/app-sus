@@ -10,16 +10,11 @@ export default {
   </div>
     <img :src="note.info.url" alt="Image Note" class="note-img" />
     <div class="note-toolbar">
-      <button @click="deleteNote" class="delete-button">
+      <button @click.stop @click="deleteNote" class="delete-button">
         <span class="material-symbols-outlined">delete</span>
       </button>
-      <span class="color-span" :style="{ backgroundColor: note.style.backgroundColor }" @click="showColorPicker(note.id)">
-        <span class="material-symbols-outlined">palette</span>
-      </span>
-      <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
-      <button @click="copyNote" class="copy-button">
-    <span class="material-symbols-outlined">file_copy</span>
-  </button>
+
+
     </div>
   </div>
     `,

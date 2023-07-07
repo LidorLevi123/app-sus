@@ -30,7 +30,7 @@ export default {
             <span @click="$router.push('/note')" class="material-symbols-outlined">file_copy</span>
           </button>
         </div>
-        <button @click="$router.push('/note')" class="back-button">X</button>
+        <button @click="$router.push('/note')" class="back-button"><span class="material-symbols-outlined">undo</span></button>
       </div>
     </div>
   `,
