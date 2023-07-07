@@ -7,6 +7,7 @@
 @import 'base/helpers.css';
 @import 'base/layout.css';
 @import 'base/forms.css';
+@import './../../lib/animate.css';
 
 /* Components */
 @import 'cmps/UserMsg.css';

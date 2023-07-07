@@ -4,6 +4,7 @@ import NoteTodos from "./NoteTodos.js"
 import NoteAdd from "./NoteAdd.js"
 import NoteVideo from "./NoteVideo.js"
 import NoteMap from "./NoteMap.js"
+import NoteCanvas from "./NoteCanvas.js"
 import NoteDetails from "../pages/NoteDetails.js"
 
 export default {
@@ -11,11 +12,12 @@ export default {
   props: ['note'],
   template: `
   <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }" @click="$router.push('/note/details/' + note.id)">
-    <div class="label-options">
-      <button title="Add Label" @click.stop class="label-selection-button" @click="toggleLabelMenu">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-    </div>
+  <div class="label-options">
+  <button title="Add Label" @click.stop class="label-selection-button" @click="toggleLabelMenu">
+    <span class="material-symbols-outlined" v-if="!isLabelMenuOpen">menu</span>
+    <span class="material-symbols-outlined" v-else>menu_open</span>
+  </button>
+</div>
     <component
       :is="getComponent(note.type)"
       :note="note"
@@ -47,6 +49,7 @@ export default {
     NoteAdd,
     NoteVideo,
     NoteMap,
+    NoteCanvas,
     NoteDetails
   },
   data() {
@@ -105,6 +108,8 @@ export default {
           return NoteVideo
         case 'NoteMap':
           return NoteMap
+        case 'NoteCanvas':
+          return NoteCanvas
         default:
           return null
       }

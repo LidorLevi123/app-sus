@@ -1,5 +1,6 @@
 import { noteService } from "../services/note.service.js"
 import { utilService } from "../../../services/util.service.js"
+import NoteCanvas from "./NoteCanvas.js"
 
 export default {
     props: ['info'],
@@ -16,6 +17,7 @@ export default {
         <button title="Video Note" @click.prevent="setNoteType('video')" class="note-type-button"><span class="material-symbols-outlined">smart_display</span></button>
         <button title="Todo Note" @click.prevent="setNoteType('todos')" class="note-type-button"><span class="material-symbols-outlined">format_list_bulleted_add</span></button>
         <button title="Current Location Note" @click.prevent="createMapNote" class="note-type-button"><span class="material-symbols-outlined">place</span></button>
+        <!-- <button @click.prevent="addCanvasNote">Add Canvas Note</button> -->
       </div>
     </div>
   </div>
@@ -23,6 +25,9 @@ export default {
   <input v-if="isImgNote" type="text" v-model="imgUrl" placeholder="Image URL" class="add-note-input" />
   <input v-if="isVideoNote" type="text" v-model="videoUrl" placeholder="YouTube Video URL" class="add-note-input" />
   <div v-if="isTodosNote" class="todos-input">
+  <div v-if="showCanvasNote">
+      <NoteCanvas @addNote="handleAddNote" />
+    </div>
     <div v-for="(todo, index) in todos" :key="index">
       <input type="checkbox" v-model="todo.done" />
       <input type="text" v-model="todo.txt" class="todos-input-line" placeholder="Todo line" />
@@ -40,8 +45,12 @@ export default {
             videoUrl: '',
             todos: [],
             noteType: '',
+            showCanvasNote: false,
         }
     },
+    components: {
+        NoteCanvas,
+      },
     computed: {
         isTextNote() {
             return this.noteType === 'text'
@@ -55,6 +64,9 @@ export default {
         isTodosNote() {
             return this.noteType === 'todos'
         },
+        isCanvasNote(){
+            return this.noteType === 'canvas'
+        }
     },
     methods: {
         setNoteType(type) {
@@ -74,6 +86,9 @@ export default {
                     break
                 case 'todos':
                     note = this.createTodosNote()
+                    break
+                case 'canvas':
+                    note = this.createCanvasNote()
                     break
                 default:
                     return
@@ -181,5 +196,15 @@ export default {
                 console.error('Geolocation is not supported by this browser.')
             }
         },
+        addCanvasNote() {
+            this.showCanvasNote = true;
+          },
+      
+          handleAddNote(note) {
+            noteService.save(note).then(() => {
+              this.$emit('addNote', note);
+              this.showCanvasNote = false; // Close the canvas note section
+            });
+          },
     },
 }
