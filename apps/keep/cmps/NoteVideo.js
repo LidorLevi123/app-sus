@@ -9,8 +9,7 @@ export default {
   </div>
   <div class="video-embed">
       <iframe
-        width="250"
-        height="315"
+
         :src="getYouTubeEmbedUrl(note.info.url)"
         frameborder="0"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
