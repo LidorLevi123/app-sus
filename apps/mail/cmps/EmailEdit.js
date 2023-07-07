@@ -46,7 +46,7 @@ export default {
 
     methods: {
         sendEmail() {
-            this.emailToEdit.category = "sent"
+            this.emailToEdit.type = 'sent'
             this.emailToEdit.sentAt = Date.now()
             
             emailService.save(this.emailToEdit)

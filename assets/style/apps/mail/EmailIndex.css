@@ -18,11 +18,15 @@
 
 .email-index > *:nth-child(2) {
     padding: 0;
-    
 }
 
-.email-index button {
+.email-index > *:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
     background-color: var(--secondary-clr5);
     color: white;
-    
+    font-size: 1.1rem;
+    font-weight: bold;
 }

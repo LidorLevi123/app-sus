@@ -2,12 +2,16 @@
     background-color:rgb(225, 225, 225);
     width: 100%;
     padding: 0;
-    
+}
+
+.email-details > *:not(:first-child) {
+    margin-inline-start: 1rem;
 }
 
 .email-details .actions {
     background-color:rgba(255, 255, 255, 0.529);
     margin-block-end: 1em;
+    padding-inline: 0.5em;
     height: 50px;
     display: flex;
     align-items: center;
@@ -15,13 +19,68 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
-.email-details .actions span {
+.email-details .material-symbols-outlined {
+    position: relative;
     cursor: pointer;
-    font-size: 2em;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.email-details .material-symbols-outlined:not(.actions > *:last-of-type) {
+    margin-inline-end: 0.5em;
+}
+
+.email-details .material-symbols-outlined::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 0px;
+    height: 0px;
+    background-color: rgba(210, 210, 210);
+    border-radius: 50%;
+    opacity: 0;
+    transition: .2s;
+}
+
+.email-details .material-symbols-outlined:hover::before {
+    opacity: 0.4;
+    width: 40px;
+    height: 40px;
+}
+
+.email-details .material-symbols-outlined:hover {
+    color: var(--secondary-clr5);
+}
+
+.email-details .actions .group {
+    margin-inline-start: 1em;
+}
+
+.email-details .actions .group2 {
+    margin-inline-start: auto;
 }
 
 .email-details h1 {
     font-size: 2em;
+    margin-inline: 0;
+}
+
+.email-details .sender-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: 2em;
+}
+
+.email-details .sender-details .star {
+    margin-inline-start: 0.5em;
+}
+
+.email-details .sender-details > *:first-child h2 {
+    display: inline;
+    margin-inline: 0.3em;
 }
 
 .email-details img {

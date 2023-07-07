@@ -6,10 +6,37 @@
 }
 
 .email-filter input {
+    border: none;
     border-radius: 1em;
     width: 40%;
 }
 
-.email-filter select {
-    align-self: center;
+.email-filter button {
+    background: none;
+    border: none;
+}
+
+.email-filter .material-symbols-outlined {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+.email-filter .material-symbols-outlined::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 0px;
+    height: 0px;
+    background-color: rgba(210, 210, 210);
+    border-radius: 50%;
+    opacity: 0;
+    transition: .2s;
+}
+.email-filter .material-symbols-outlined:hover::before {
+    opacity: 0.4;
+    width: 30px;
+    height: 30px;
 }
