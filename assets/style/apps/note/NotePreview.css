@@ -128,3 +128,57 @@
     margin-block-start: 1rem;
 }
 
+.label-selection-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    border: none;
+
+    padding: 0;
+    position: absolute;
+
+    cursor: pointer;
+
+    position: absolute;
+    top: 5px;
+    right: 35px;
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .label-menu {
+    position: absolute;
+    bottom: 0; /* Updated position to be above the note */
+    right: 60px; /* Positioned to the right */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+  }
+
+  .label-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 4px;
+    cursor: pointer;
+  }
+  
+  .label-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    color: white;
+    padding: 4px;
+    margin-bottom: 8px;
+  }

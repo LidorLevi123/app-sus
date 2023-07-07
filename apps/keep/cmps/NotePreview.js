@@ -12,6 +12,12 @@ export default {
   template: `
   
     <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }" @click="$router.push('/note/details/' + note.id)">
+    <div class="label-options">
+    <button title="Add Label" @click.stop class="label-selection-button" @click="toggleLabelMenu">
+    <span class="material-symbols-outlined">menu</span>
+     
+    </button>
+  </div>
       <component
         :is="getComponent(note.type)"
         :note="note"
@@ -23,15 +29,23 @@ export default {
         @copyNote="copyNote"
       />
       
+      <div v-show="isLabelMenuOpen" class="label-menu">
+      <button @click.stop v-for="label in labelOptions" :key="label.name" class="label-option" :style="{ backgroundColor: label.color }" @click="selectLabel(label)">
+        {{ label.name }}
+      </button>
+    </div>
+
       <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
       <button @click.stop @click="togglePinNote" class="pin-button">
       <span title="Pin Note" class="material-symbols-outlined" :class="{ 'pinned-icon': note.isPinned }">push_pin</span>
     </button>
-    
+    <div v-if="note.label" class="label-display" :style="{ backgroundColor: note.label.color }">
+      {{ note.label.name }}
+    </div>
     </div>
 
   `,
-  
+
   components: {
     NoteTxt,
     NoteImg,
@@ -46,8 +60,20 @@ export default {
       isEditing: false,
       editMode: '',
       editedNote: null,
-      isModalOpen: false
+      isModalOpen: false,
+      selectedLabel: '', // Store the selected label
+      isLabelMenuOpen: false,
+      labelOptions: [
+        { name: 'Critical', color: '#FF0000' },
+        { name: 'Family', color: '#00FF00' },
+        { name: 'Work', color: '#0000FF' },
+        { name: 'Friends', color: '#FFFF00' },
+        { name: 'Spam', color: '#FF00FF' },
+        { name: 'Memories', color: '#00FFFF' },
+        { name: 'Romantic', color: '#FFA500' }
+      ]
     }
+
   },
   methods: {
     fetchNotes() {
@@ -100,6 +126,14 @@ export default {
 
       this.$emit('copyNote', this.note)
     },
-    
+    toggleLabelMenu() {
+      this.isLabelMenuOpen = !this.isLabelMenuOpen
+    },
+
+    selectLabel(label) {
+      this.selectedLabel = label
+      this.editedNote.label = label
+      this.isLabelMenuOpen = false
+    },
   }
 }

@@ -81,7 +81,6 @@ export default {
       },
     mounted() {
         this.fetchNotes()
-        console.log('hi')
     },
     computed: {
         filteredNotes() {
