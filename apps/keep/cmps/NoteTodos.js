@@ -15,7 +15,7 @@ export default {
     </li>
   </ul>
   <div class="note-toolbar">
-      <button @click.stop @click="deleteNote" class="delete-button">
+      <button title="Delete" @click.stop @click="deleteNote" class="delete-button">
         <span class="material-symbols-outlined">delete</span>
       </button>
 

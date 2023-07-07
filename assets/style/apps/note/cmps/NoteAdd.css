@@ -5,6 +5,7 @@
 .input-container {
     display: flex;
     align-items: center;
+    flex-grow: 1;
 }
 
 .button-group {
@@ -76,3 +77,4 @@
     border: 1px solid #c7c7c7;
     margin-bottom: 7px;
 }
+

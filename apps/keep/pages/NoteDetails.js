@@ -20,18 +20,19 @@ export default {
         ></component>
 
         <div class="btns-details note-toolbar">
-          <button @click="deleteNote(noteData)" class="delete-button">
+          <button title="Delete" @click="deleteNote(noteData)" class="delete-button">
             <span @click="$router.push('/note')" class="material-symbols-outlined">delete</span>
           </button>
-          <span class="color-span" :style="{ backgroundColor: noteData.style.backgroundColor }" @click="showColorPicker(noteData.id)">
+          <span title="Change Color" class="color-span" :style="{ backgroundColor: noteData.style.backgroundColor }" @click="showColorPicker(noteData.id)">
             <span class="material-symbols-outlined">palette</span>
           </span>
           <input type="color" class="color-input" ref="colorPicker" @input="changeColor(noteData.id, $event.target.value)" hidden />
-          <button @click="copyNote(noteData)" class="copy-button">
+          <button title="Copy Note" @click="copyNote(noteData)" class="copy-button">
             <span @click="$router.push('/note')" class="material-symbols-outlined">file_copy</span>
           </button>
         </div>
-        <button @click="$router.push('/note')" class="back-button"><span class="material-symbols-outlined">undo</span></button>
+        <button title="Back" @click="$router.push('/note')" class="back-button"><span class="material-symbols-outlined">undo</span></button>
+        
       </div>
     </div>
   `,
