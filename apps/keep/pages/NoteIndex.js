@@ -7,6 +7,7 @@ import NoteVideo from '../cmps/NoteVideo.js'
 import NoteMap from '../cmps/NoteMap.js'
 import { utilService } from '../../../services/util.service.js'
 import NoteEdit from './NoteEdit.js'
+import NoteDetails from './NoteDetails.js'
 
 import NoteFilter from '../cmps/NoteFilter.js'
 import NoteList from '../cmps/NoteList.js'
@@ -52,7 +53,7 @@ export default {
         NoteAdd,
         NoteVideo,
         NoteMap,
-
+        NoteDetails
 
     },
     data() {
@@ -70,8 +71,17 @@ export default {
     created() {
         this.fetchNotes()
     },
+    watch: {
+        notes: {
+          deep: true,
+          handler() {
+            this.fetchNotes()
+          },
+        },
+      },
     mounted() {
         this.fetchNotes()
+        console.log('hi')
     },
     computed: {
         filteredNotes() {
