@@ -10,14 +10,12 @@ export default {
   name: 'preview',
   props: ['note'],
   template: `
-  
     <div class="note-card" :style="{ backgroundColor: note.style.backgroundColor }" @click="$router.push('/note/details/' + note.id)">
-    <div class="label-options">
-    <button title="Add Label" @click.stop class="label-selection-button" @click="toggleLabelMenu">
-    <span class="material-symbols-outlined">menu</span>
-     
-    </button>
-  </div>
+      <div class="label-options">
+        <button title="Add Label" @click.stop class="label-selection-button" @click="toggleLabelMenu">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
       <component
         :is="getComponent(note.type)"
         :note="note"
@@ -28,24 +26,20 @@ export default {
         @showColorPicker="showColorPicker"
         @copyNote="copyNote"
       />
-      
       <div v-show="isLabelMenuOpen" class="label-menu">
-      <button @click.stop v-for="label in labelOptions" :key="label.name" class="label-option" :style="{ backgroundColor: label.color }" @click="selectLabel(label)">
-        {{ label.name }}
-      </button>
-    </div>
-
+        <button @click.stop v-for="label in labelOptions" :key="label.name" class="label-option" :style="{ backgroundColor: label.color }" @click="selectLabel(label)">
+          {{ label.name }}
+        </button>
+      </div>
       <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
       <button @click.stop @click="togglePinNote" class="pin-button">
-      <span title="Pin Note" class="material-symbols-outlined" :class="{ 'pinned-icon': note.isPinned }">push_pin</span>
-    </button>
-    <div v-if="note.label" class="label-display" :style="{ backgroundColor: note.label.color }">
-      {{ note.label.name }}
+        <span title="Pin Note" class="material-symbols-outlined" :class="{ 'pinned-icon': note.isPinned }">push_pin</span>
+      </button>
+      <div v-if="editedNote.label" class="label-display" :style="{ backgroundColor: editedNote.label.color }">
+        {{ editedNote.label.name }}
+      </div>
     </div>
-    </div>
-
   `,
-
   components: {
     NoteTxt,
     NoteImg,
@@ -59,7 +53,10 @@ export default {
     return {
       isEditing: false,
       editMode: '',
-      editedNote: null,
+      editedNote: {
+        ...this.note,
+        label: null
+      },
       isModalOpen: false,
       selectedLabel: '', // Store the selected label
       isLabelMenuOpen: false,
@@ -67,23 +64,14 @@ export default {
         { name: 'Critical', color: '#FF0000' },
         { name: 'Family', color: '#00FF00' },
         { name: 'Work', color: '#0000FF' },
-        { name: 'Friends', color: '#FFFF00' },
+        { name: 'Friends', color: '#b3b306' },
         { name: 'Spam', color: '#FF00FF' },
         { name: 'Memories', color: '#00FFFF' },
         { name: 'Romantic', color: '#FFA500' }
       ]
     }
-
   },
   methods: {
-    fetchNotes() {
-      noteService.query().then((notes) => {
-        this.notes = notes.map((note) => ({
-          ...note,
-
-        }))
-      })
-    },
     deleteNote() {
       this.$emit('deleteNote', this.note)
     },
@@ -123,13 +111,11 @@ export default {
       this.$emit('togglePinNote', this.note)
     },
     copyNote() {
-
       this.$emit('copyNote', this.note)
     },
     toggleLabelMenu() {
       this.isLabelMenuOpen = !this.isLabelMenuOpen
     },
-
     selectLabel(label) {
       this.selectedLabel = label
       this.editedNote.label = label
