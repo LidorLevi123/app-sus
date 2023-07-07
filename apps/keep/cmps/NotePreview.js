@@ -25,7 +25,7 @@ export default {
       
       <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
       <button @click.stop @click="togglePinNote" class="pin-button">
-      <span class="material-symbols-outlined" :class="{ 'pinned-icon': note.isPinned }">push_pin</span>
+      <span title="Pin Note" class="material-symbols-outlined" :class="{ 'pinned-icon': note.isPinned }">push_pin</span>
     </button>
     
     </div>

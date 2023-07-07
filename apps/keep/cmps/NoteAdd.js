@@ -8,14 +8,14 @@ export default {
   <div class="input-wrapper">
     <div class="input-container">
       <input type="text" v-model="title" placeholder="Write your mind" class="add-note-input" />
-      <button @click.prevent="addNote" class="add-note-button"><span class="material-symbols-outlined">save</span></button>
+      <button title="Save Note" @click.prevent="addNote" class="add-note-button"><span class="material-symbols-outlined">save</span></button>
 
       <div class="button-group">
-        <button @click.prevent="setNoteType('text')" class="note-type-button"><span class="material-symbols-outlined">article</span></button>
-        <button @click.prevent="setNoteType('img')" class="note-type-button"><span class="material-symbols-outlined">image</span></button>
-        <button @click.prevent="setNoteType('video')" class="note-type-button"><span class="material-symbols-outlined">smart_display</span></button>
-        <button @click.prevent="setNoteType('todos')" class="note-type-button"><span class="material-symbols-outlined">format_list_bulleted_add</span></button>
-        <button @click.prevent="createMapNote" class="note-type-button"><span class="material-symbols-outlined">place</span></button>
+        <button title="Text Note" @click.prevent="setNoteType('text')" class="note-type-button"><span class="material-symbols-outlined">article</span></button>
+        <button title="Image Note" @click.prevent="setNoteType('img')" class="note-type-button"><span class="material-symbols-outlined">image</span></button>
+        <button title="Video Note" @click.prevent="setNoteType('video')" class="note-type-button"><span class="material-symbols-outlined">smart_display</span></button>
+        <button title="Todo Note" @click.prevent="setNoteType('todos')" class="note-type-button"><span class="material-symbols-outlined">format_list_bulleted_add</span></button>
+        <button title="Current Location Note" @click.prevent="createMapNote" class="note-type-button"><span class="material-symbols-outlined">place</span></button>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@ export default {
       <input type="checkbox" v-model="todo.done" />
       <input type="text" v-model="todo.txt" class="todos-input-line" placeholder="Todo line" />
     </div>
-    <button @click.prevent="addTodo" class="add-todo-button"><span class="material-symbols-outlined">add_circle</span></button>
+    <button title="Add Another Todo" @click.prevent="addTodo" class="add-todo-button"><span class="material-symbols-outlined">add_circle</span></button>
   </div>
 </form>
     `,
