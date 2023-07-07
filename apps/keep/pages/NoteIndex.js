@@ -8,13 +8,13 @@ import NoteMap from '../cmps/NoteMap.js'
 import { utilService } from '../../../services/util.service.js'
 import NoteEdit from './NoteEdit.js'
 
-
 import NoteFilter from '../cmps/NoteFilter.js'
 import NoteList from '../cmps/NoteList.js'
 
 export default {
     template: `
 <div class="notes-index">
+    
   <div class="inputs">
     <div class="notes-filter">
     <RouterView></RouterView>
@@ -23,6 +23,7 @@ export default {
     <div class="add-note-section">
     <NoteAdd @addNote="addNote" v-if="!isEditing" />
     <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
+    
     </div>
   </div>
   <div class="note-container">
@@ -35,10 +36,13 @@ export default {
         @togglePinNote="togglePinNote"
         @copyNote="copyNote"
       />
+      
     </li>
 
   </div>
+  
   </div>
+
     `,
     components: {
         NotePreview,
@@ -47,7 +51,8 @@ export default {
         NoteFilter,
         NoteAdd,
         NoteVideo,
-        NoteMap
+        NoteMap,
+
 
     },
     data() {
@@ -95,7 +100,7 @@ export default {
             })
         },
         changeNoteColor(noteId, color) {
-            console.log(color)
+
             const note = this.notes.find((note) => note.id === noteId)
             if (note) {
                 note.style.backgroundColor = color
@@ -103,7 +108,7 @@ export default {
                     showSuccessMsg('Note color updated successfully!')
                 })
             }
-            console.log(note)
+
         },
         editNote(note) {
             this.isEditing = true
@@ -133,6 +138,7 @@ export default {
             })
         },
         copyNote(note) {
+
             const copiedNote = JSON.parse(JSON.stringify(note))
             copiedNote.id = ''
             noteService.save(copiedNote).then(() => {

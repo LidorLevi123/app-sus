@@ -10,23 +10,24 @@ export default {
     template: `
 <div class="overlay" @click="$router.push('/note')">
       <div class="note-details" v-if="noteData" :style="{ backgroundColor: noteData.style.backgroundColor }" @click.stop>
-        <!-- Render the appropriate component based on the note type -->
+
         <component
           :is="getComponent(noteData.type)"
           :note="noteData"
           :style="{ backgroundColor: noteData.style.backgroundColor }"
+
         ></component>
-        <!-- Other note details -->
+
         <div class="btns-details note-toolbar">
-          <button @click="deleteNote" class="delete-button">
-            <span class="material-symbols-outlined">delete</span>
+          <button @click="deleteNote(noteData)" class="delete-button">
+            <span @click="$router.push('/note')" class="material-symbols-outlined">delete</span>
           </button>
           <span class="color-span" :style="{ backgroundColor: noteData.style.backgroundColor }" @click="showColorPicker(noteData.id)">
             <span class="material-symbols-outlined">palette</span>
           </span>
-          <input type="color" class="color-input" ref="colorPicker" @change="changeColor(noteData.id, $event.target.value)" hidden />
-          <button @click="copyNote" class="copy-button">
-            <span class="material-symbols-outlined">file_copy</span>
+          <input type="color" class="color-input" ref="colorPicker" @input="changeColor(noteData.id, $event.target.value)" hidden />
+          <button @click="copyNote(noteData)" class="copy-button">
+            <span @click="$router.push('/note')" class="material-symbols-outlined">file_copy</span>
           </button>
         </div>
         <button @click="$router.push('/note')" class="back-button">X</button>
@@ -43,13 +44,29 @@ export default {
     },
     data() {
         return {
+            notes: [],
             noteData: null,
-        };
+            isEditing: false,
+            editingNote: null,
+            isModalOpen: false,
+            selectedNote: null,
+            filterBy: {
+                txt: '', // Add other filter properties as needed
+            },
+        }
     },
     created() {
         this.fetchNoteData()
     },
     methods: {
+        fetchNotes() {
+            noteService.query().then((notes) => {
+                this.notes = notes.map((note) => ({
+                    ...note,
+
+                }))
+            })
+        },
         fetchNoteData() {
             const noteId = this.$route.params.noteId
             noteService
@@ -76,19 +93,73 @@ export default {
                     return null
             }
         },
-        deleteNote() {
-            this.$emit('deleteNote', this.noteData)
+        addNote(note) {
+            noteService.save(note).then(() => {
+                this.fetchNotes()
+            })
         },
-        changeColor(id, color) {
-            this.$emit('changeColor', id, color)
+        deleteNote(note) {
+            noteService.remove(note.id).then(() => {
+                this.fetchNotes()
+            })
+        },
+        changeNoteColor(noteId, color) {
+
+
+
+            this.noteData.style.backgroundColor = color
+            noteService.save(this.noteData).then(() => {
+                showSuccessMsg('Note color updated successfully!')
+            })
+
+
+        },
+        editNote(note) {
+            this.isEditing = true
+            this.editingNote = note
+        },
+        updateNote(updatedNote) {
+            noteService.save(updatedNote).then(() => {
+                showSuccessMsg('Note updated successfully!')
+                this.isEditing = false
+                this.editingNote = null
+                this.fetchNotes()
+            })
+        },
+        cancelEdit() {
+            this.isEditing = false
+            this.editingNote = null
+        },
+        setFilterBy(filterBy) {
+            noteService.setFilterBy(filterBy)
+            this.filterBy = noteService.getFilterBy()
+            this.fetchNotes()
+        },
+        togglePinNote(note) {
+            note.isPinned = !note.isPinned
+            noteService.save(note).then(() => {
+                this.fetchNotes()
+            })
+        },
+        copyNote(note) {
+
+            const copiedNote = JSON.parse(JSON.stringify(note))
+            copiedNote.id = ''
+            noteService.save(copiedNote).then(() => {
+                this.fetchNotes()
+            })
         },
         showColorPicker(noteId) {
             const colorPicker = this.$refs.colorPicker
             colorPicker.click()
         },
-        copyNote() {
-            console.log(this.noteData)
-            this.$emit('copyNote', this.noteData)
+        changeColor(id, color) {
+            this.changeNoteColor(id, color)
         },
-    },
-};
+        beforeRouteEnter(to, from, next) {
+            next((vm) => {
+                vm.fetchNoteData(); // Reload the note data
+            })
+        },
+    }
+}
