@@ -13,6 +13,7 @@ const { createRouter, createWebHashHistory } = VueRouter
 
 const routerOptions = {
 	history: createWebHashHistory(),
+	
 	routes: [
 		{
 			path: '/',
@@ -48,5 +49,6 @@ const routerOptions = {
         },
 	],
 }
+
 
 export const router = createRouter(routerOptions)

@@ -4,6 +4,7 @@ import NoteTodos from "./NoteTodos.js"
 import NoteAdd from "./NoteAdd.js"
 import NoteVideo from "./NoteVideo.js"
 import NoteMap from "./NoteMap.js"
+import NoteDetails from "../pages/NoteDetails.js"
 
 export default {
   name: 'preview',
@@ -21,10 +22,12 @@ export default {
         @showColorPicker="showColorPicker"
         @copyNote="copyNote"
       />
+      
       <input type="color" class="color-input" ref="colorPicker" @change="changeColor(note.id, $event.target.value)" hidden />
-      <button @click="togglePinNote" class="pin-button">
+      <button @click.stop @click="togglePinNote" class="pin-button">
       <span class="material-symbols-outlined" :class="{ 'pinned-icon': note.isPinned }">push_pin</span>
     </button>
+    
     </div>
 
   `,
@@ -35,7 +38,8 @@ export default {
     NoteTodos,
     NoteAdd,
     NoteVideo,
-    NoteMap
+    NoteMap,
+    NoteDetails
   },
   data() {
     return {
@@ -93,7 +97,9 @@ export default {
       this.$emit('togglePinNote', this.note)
     },
     copyNote() {
+
       this.$emit('copyNote', this.note)
-    }
+    },
+    
   }
 }

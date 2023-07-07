@@ -171,6 +171,18 @@ function _createNotes() {
                     backgroundColor: utilService.getRandomColor()
                 }
             },
+            {
+                id: 'n202',
+                type: 'NoteImg',
+                isPinned: false,
+                info: {
+                    url: 'https://api.memegen.link/images/both/width_or_height/why_not_both~q.png',
+                    title: 'Pain'
+                },
+                style: {
+                    backgroundColor: utilService.getRandomColor()
+                }
+            },
             
         ]
         utilService.saveToStorage(NOTE_KEY, notes)

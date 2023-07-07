@@ -15,6 +15,7 @@ export default {
         <button @click.prevent="setNoteType('img')" class="note-type-button"><span class="material-symbols-outlined">image</span></button>
         <button @click.prevent="setNoteType('video')" class="note-type-button"><span class="material-symbols-outlined">smart_display</span></button>
         <button @click.prevent="setNoteType('todos')" class="note-type-button"><span class="material-symbols-outlined">format_list_bulleted_add</span></button>
+        <button @click.prevent="createMapNote" class="note-type-button"><span class="material-symbols-outlined">place</span></button>
       </div>
     </div>
   </div>
@@ -147,7 +148,38 @@ export default {
             this.imgUrl = ''
             this.videoUrl = ''
             this.todos = []
-            this.noteType = 'text'
+            this.noteType = ''
+        },
+        createMapNote() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const lat = position.coords.latitude
+                    const lng = position.coords.longitude
+
+                    const mapNote = {
+                        id: '',
+                        type: 'NoteMap',
+                        isPinned: false,
+                        info: {
+                            lat,
+                            lng,
+                            title: this.title,
+                        },
+                        style: {
+                            backgroundColor: utilService.getRandomColor()
+                        }
+                    }
+
+                    noteService.save(mapNote).then(() => {
+                        this.$emit('addNote', mapNote)
+                        this.resetFields()
+                    })
+                }, (error) => {
+                    console.error('Error retrieving location:', error)
+                })
+            } else {
+                console.error('Geolocation is not supported by this browser.')
+            }
         },
     },
 }
