@@ -117,12 +117,8 @@
 
 .notes-index {
     margin: 0;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: max-content 1fr;
-    grid-template-areas:
-        'notes-filter add-note-section'
-        'notes-filter notes-container';
+
+
     justify-items: unset;
 }
 
