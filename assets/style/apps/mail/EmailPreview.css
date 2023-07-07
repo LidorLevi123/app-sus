@@ -3,8 +3,9 @@
     grid-template-columns: minmax(100px, 180px) 1fr 60px;
     column-gap: 2em;
     padding: 1em;
-    background-color: #d4d0ce6c;
+    background-color: var(--clr4);
     font-weight: bold;
+    transition: 0.1s;
 }
 
 .email-preview span {
@@ -15,11 +16,13 @@
 
 .email-preview .email-body {
     font-weight: normal;
+    opacity: 0.8;
 }
 
 .email-preview.read {
-    background-color: #d1cdcd;
+    background-color: var(--clr5);
     font-weight: normal;
+    opacity: 0.9;
 }
 
 .email-preview .star {
@@ -28,4 +31,12 @@
 
 .email-preview .material-symbols-outlined {
     font-size: 1rem;
+}
+
+.email-preview.checked {
+    background-color: var(--secondary-clr6);
+}
+
+.email-preview:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
 }

@@ -1,11 +1,12 @@
 :root {
   --clr1: #f2f2f2;
   --clr2: #ffffff;
-  --clr3: #0b57d0;
-  --clr4: rgb(96, 96, 96);
-  --clr5: #d4d0ce6c;
+  --clr3: #2f2f2f;
+  --clr4: #d4d0ce6c;
+  --clr5: #d1cdcd;
   
-  --secondary-clr6: #3F2305;
+  --secondary-clr5: #0b57d0;
+  --secondary-clr6: #c2dbff;
   --secondary-clr7: #DFD7BF;
   --secondary-clr8: #F2EAD3;
   --secondary-clr9: #f3f0eb;

@@ -7,7 +7,7 @@
 
     font-family: sans-serif;
     padding: 1em;
-    background-color: var(--clr5);
+    background-color: var(--clr4);
 }
 
 .email-index > * {
@@ -22,7 +22,7 @@
 }
 
 .email-index button {
-    background-color: var(--clr3);
+    background-color: var(--secondary-clr5);
     color: white;
     
 }
