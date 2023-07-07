@@ -61,5 +61,7 @@ export default {
         closeWindow() {
             this.$emit('closeWindow')
         }
-    }
+    },
+
+    name: 'EmailEdit'
 }
