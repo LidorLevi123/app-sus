@@ -13,7 +13,7 @@
     break-inside: avoid;
     page-break-inside: avoid;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
+  }
 
 .note-title {
     font-weight: bold;
@@ -28,8 +28,9 @@
 
 .note-text {
     color: black;
-    font-size: 14px;
+    font-size: 24px;
     margin-bottom: 10px;
+    margin-top: 15px;
 }
 
 .note-text:focus-visible {
