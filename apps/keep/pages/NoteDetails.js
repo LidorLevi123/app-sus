@@ -32,6 +32,7 @@ export default {
           </button>
         </div>
         <button title="Back" @click="$router.push('/note')" class="back-button"><span class="material-symbols-outlined">undo</span></button>
+        
       </div>
     </div>
   `,

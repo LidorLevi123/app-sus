@@ -36,6 +36,7 @@ export default {
         @editNote="editNote"
         @togglePinNote="togglePinNote"
         @copyNote="copyNote"
+        @updateNoteLabel="updateNoteLabel"
       />
       
     </li>
@@ -73,12 +74,12 @@ export default {
     },
     watch: {
         notes: {
-          deep: true,
-          handler() {
-            this.fetchNotes()
-          },
+            deep: true,
+            handler() {
+                this.fetchNotes()
+            },
         },
-      },
+    },
     mounted() {
         this.fetchNotes()
     },
@@ -151,9 +152,15 @@ export default {
             const copiedNote = JSON.parse(JSON.stringify(note))
             copiedNote.id = ''
             noteService.save(copiedNote).then(() => {
-              this.fetchNotes()
+                this.fetchNotes()
             })
-          }
+        },
+        updateNoteLabel(updatedNote) {
+            noteService.save(updatedNote).then(() => {
+                showSuccessMsg('Note label updated successfully!')
+                this.fetchNotes()
+            })
+        }
 
     }
 }

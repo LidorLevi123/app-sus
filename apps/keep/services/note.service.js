@@ -97,6 +97,7 @@ function _createNotes() {
                 id: 'n105',
                 createdAt: 2323232,
                 type: 'NoteTxt',
+                label: { name: 'Family', color: '#00FF00' },
                 isPinned: false,
                 info: {
                     txt: 'Discuss project timeline and deliverables.',
@@ -149,6 +150,7 @@ function _createNotes() {
             {
                 id: 'n107',
                 type: 'NoteVideo',
+                label: { name: 'Critical', color: '#FF0000' },
                 isPinned: false,
                 info: {
                     url: 'https://www.youtube.com/watch?v=5harlhiqleY',
