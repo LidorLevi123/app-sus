@@ -4,6 +4,8 @@
     justify-items: center;
     gap: 1em;
     padding-inline: 2em;
+    margin: auto;
+    max-width: 1400px;
 }
 
 .home-page h1{
