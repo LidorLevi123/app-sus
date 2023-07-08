@@ -27,7 +27,7 @@
 .user-msg button {
     background: none;
     border: none;
-    color: var(--secondary-clr5);
+    color: var(--secondary-clr1);
     font-weight: bold;
     margin-inline: 2em;
 }

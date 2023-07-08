@@ -59,16 +59,14 @@ const routerOptions = {
 		{
 			path: '/book',
 			component: BookIndex,
-			children: [
-				{
-					path: '/details/:bookId',
-					component: BookDetails,
-				},
-				{
-					path: '/edit/:bookId?',
-					component: BookEdit,
-				},
-			]
+		},
+		{
+			path: '/book/details/:bookId',
+			component: BookDetails,
+		},
+		{
+			path: '/book/edit/:bookId?',
+			component: BookEdit,
 		},
 	],
 }

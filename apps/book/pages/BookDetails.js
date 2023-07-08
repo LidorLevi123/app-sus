@@ -4,7 +4,6 @@ import AddReview from '../cmps/AddReview.js'
 
 export default {
     template: `
-        <RouterLink to="/book">Back to Book list</RouterLink>
         <section class="book-details" v-if="book">
             <img :src="book.thumbnail" alt="">
             <div class="details">
@@ -17,11 +16,12 @@ export default {
                 <p>Pages: {{ bookPageCount }}</p>
                 <p>Publish Date: {{ bookPublishDate }}</p>
                 <div class="book-paging">
-                    <RouterLink :to="/book/ + book.nextBookId">To Previous Book</RouterLink>
-                    <RouterLink :to="/book/ + book.prevBookId">To Next Book</RouterLink>
+                    <RouterLink :to="/book/ + 'details/' + book.nextBookId">To Previous Book</RouterLink>
+                    <RouterLink :to="/book/ + 'details/' + book.prevBookId">To Next Book</RouterLink>
                 </div>
             </div>
             <div class="price">
+                <RouterLink class="btn-back" to="/book">Back to list</RouterLink>
                 <span :class="priceClass">Price: $\{{ book.listPrice.amount }}</span>
             </div>
         </section>
@@ -41,6 +41,8 @@ export default {
     methods: {
         loadBook() {
             const { bookId } = this.$route.params
+            if(!bookId) return
+
             bookService.get(bookId)
                 .then(book => {
                     this.book = book

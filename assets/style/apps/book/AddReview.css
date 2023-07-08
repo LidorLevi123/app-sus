@@ -1,18 +1,18 @@
 .add-review {
     text-align: center;
     font-size: 2em;
-    background-color: var(--clr3);
+    background-color: var(--tertiary-clr3);
     padding: 0.5em;
-    border-radius: .5em;
+    border-top: 1px solid var(--tertiary-clr1);
 }
 
 .add-review form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    background-color: var(--clr4);
+    background-color: var(--tertiary-clr4);
     padding: 0.5em;
-    border-radius: .5em;
+    border-radius: 0.5em;
 }
 
 .add-review form > * {

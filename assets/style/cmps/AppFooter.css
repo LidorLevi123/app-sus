@@ -7,4 +7,5 @@
     text-align: center;
     background: white;
     color:  black;
+    z-index: -1;
 }

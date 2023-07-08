@@ -59,7 +59,7 @@
 }
 
 .email-preview.checked {
-    background-color: var(--secondary-clr6);
+    background-color: var(--secondary-clr2);
 }
 
 .email-preview:hover {

@@ -35,7 +35,7 @@
     right: 80px;
     width: 80px;
     z-index: 3;
-    background: var(--secondary-clr5);
+    background: var(--secondary-clr1);
     cursor: pointer;
     color: white;
 }
@@ -51,7 +51,7 @@
         align-items: center;
         justify-content: space-between;
         border: none;
-        background-color: var(--secondary-clr5);
+        background-color: var(--secondary-clr1);
         color: white;
         font-size: 1.1rem;
         font-weight: bold;

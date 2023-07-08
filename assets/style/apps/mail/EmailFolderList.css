@@ -45,11 +45,11 @@ body.menu-open .email-folder-list {
 }
 
 .email-folder-list ul li:hover {
-    background-color: var(--secondary-clr8);
+    background-color: var(--secondary-clr4);
 }
 
 .email-folder-list ul li.active {
-    background-color: var(--secondary-clr8);
+    background-color: var(--secondary-clr4);
 }
 
 @media (min-width: 720px) {

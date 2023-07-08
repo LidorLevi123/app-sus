@@ -106,7 +106,7 @@ export default {
             this.loadEmails()
         },
         updatePageInfo(emailCountMap) {
-            // console.log(emailCountMap)
+            
         },
         replyEmail(emailId) {
             this.isComposeClicked = true

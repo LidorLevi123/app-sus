@@ -51,7 +51,7 @@
 }
 
 .email-details .material-symbols-outlined:hover {
-    color: var(--secondary-clr5);
+    color: var(--secondary-clr1);
 }
 
 .email-details .actions .group {
