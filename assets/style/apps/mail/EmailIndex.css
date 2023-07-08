@@ -29,6 +29,17 @@
     opacity: 0.9;
 }
 
+.email-index .btn-plus {
+    position: fixed;
+    bottom: 80px;
+    right: 80px;
+    width: 80px;
+    z-index: 3;
+    background: var(--secondary-clr5);
+    cursor: pointer;
+    color: white;
+}
+
 @media (min-width: 720px) {
     .email-index {
         grid-template-columns: 170px 1fr;
@@ -49,5 +60,9 @@
 
     .email-index>*:nth-child(3) {
         display: block;
+    }
+
+    .email-index .btn-plus {
+        display: none;
     }
 }

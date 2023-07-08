@@ -14,6 +14,7 @@ export default {
             <EmailFolderList @filter="setFilterBy" @mail-count="updatePageInfo" :emails="emails"/>
             <EmailEdit v-if="isComposeClicked" @closeWindow="toggleEmailAddWindow"/>
             <RouterView @reply='replyEmail' @delete="deleteEmail" :emails="filteredEmails"/>
+            <span class="material-symbols-outlined" class="btn-plus" @click="isComposeClicked = !isComposeClicked">edit</span>
         </section>
     `,
 
@@ -79,7 +80,8 @@ export default {
                 emailService.save(email)
                 return
             } else {
-                // Delete Email Completly from array
+                const emailIdx = this.emails.findIndex(mail => mail.id === email.id)
+                this.emails.splice(1, emailIdx)
             }
         },
         toggleEmailAddWindow(emailToEdit) {
