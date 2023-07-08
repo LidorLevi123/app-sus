@@ -1,50 +1,41 @@
 .home-page div{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    height: calc(90vh - 90px);
-    padding: 3em;
-    background-color: white;
-    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    justify-items: center;
+    gap: 1em;
+    padding-inline: 2em;
 }
+
 .home-page h1{
     color: black;
-    font-size: 2em;
+    font-size: 3rem;
     font-family: Arial, Helvetica, sans-serif;
-    position: absolute;
-    left: 50%;
-    top: 15%;
-    translate: -50%;
     text-align: center;
-    
+    line-height: 2;
+    letter-spacing: 0.05em;
 }
+
 .home-page h2{
     color: black;
     font-size: 1.5em;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    
-    
 }
+
 .home-page img {
     width: 125px;
 }
 
 .home-page article {
-    width: 80%;
+    width: 400px;
     font-size: 1.75em;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
-    padding: 1rem;
     background-color: var(--secondary-clr9);
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+    border-radius: 0.5em;
+    transition: 0.2s;
     cursor: pointer;
     border: 1px solid rgb(102, 93, 93);
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-}
-
-.home-page article:not(:last-of-type) {
-    margin-inline-end: 3em;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .home-page article:hover {

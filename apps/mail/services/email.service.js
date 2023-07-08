@@ -17,6 +17,7 @@ export const emailService = {
     remove,
     save,
     getEmptyEmail,
+    getEmailCountMap
 }
 
 window.emailService = emailService
@@ -56,6 +57,29 @@ function getEmptyEmail() {
         from: '',
         to: ''
     }
+}
+
+function getEmailCountMap() {
+    return storageService.query(EMAIL_KEY).then(emails => {
+        const emailCountMap = emails.reduce(
+            (map, email) => {
+                map.total++
+                if (email.type === 'inbox') map.inbox++
+                else if (email.type === 'sent') map.sent++
+
+                if (email.isRead) map.read++
+                else map.unread++
+
+                if(email.category === 'starred') map.starred++
+                else if(email.category === 'draft') map.draft++
+                else if(email.category === 'trash') map.trash++
+
+                return map
+            },
+            { total: 0, inbox: 0, sent: 0, read: 0, unread: 0, starred: 0, draft: 0, trash: 0 }
+        )
+        return emailCountMap
+    })
 }
 
 function _setEmailNextPrevId(email) {
@@ -151,6 +175,7 @@ function _addEmailDemoData(email) {
     email.body = messages[randomSubjectMsgIdx]
     email.type = types[randomTypeIdx]
     email.category = categories[randomCategoryIdx]
-    email.isRead = utilService.getRandomIntInclusive(1, 2) === 1 ? true : false
+    email.isRead = false
     email.sentAt = new Date(utilService.getRandomIntInclusive(new Date('2020').getTime(), new Date('2023').getTime())).getTime()
+    if(email.type === 'sent') email.isRead = true
 }

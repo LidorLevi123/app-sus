@@ -5,12 +5,18 @@
 
 .email-folder-list ul li {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     cursor: pointer;
     padding: 1em;
     border-radius: 1em;
     transition: .2s;
+}
+
+.email-folder-list ul li > *:first-child {
+    margin-inline-end: 0.5em;
+}
+
+.email-folder-list ul li > *:last-child {
+    margin-inline-start: auto;
 }
 
 .email-folder-list ul li span{
@@ -23,5 +29,9 @@
 }
 
 .email-folder-list ul li:hover {
+    background-color: var(--secondary-clr9);
+}
+
+.email-folder-list ul li.active {
     background-color: var(--secondary-clr9);
 }
