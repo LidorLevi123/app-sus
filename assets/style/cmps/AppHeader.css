@@ -76,4 +76,10 @@
 
 .menu img {
   max-width: 40px;
+  padding: 2px;
+}
+
+.menu img:hover{
+  background-color: #a5bbdf;
+  border-radius: 5px;
 }
