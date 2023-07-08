@@ -40,3 +40,21 @@
     
     margin-bottom: 7px;
 }
+
+@media (max-width: 720px) {
+    .add-note-textarea{
+        margin-top: 30px;
+
+    }
+    .add-note-input{
+        margin-top: 30px;
+    }
+    .add-note-form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 60px;
+        margin-left: 50px;
+        max-width: 200px;
+    }
+  }

@@ -10,7 +10,7 @@ export default {
                 <span class="material-symbols-outlined" title="Delete">delete</span>
                 <span class="material-symbols-outlined" title="Mark as Unread">mail</span>
                 <span class="material-symbols-outlined group" title="Schedule">schedule</span>
-                <span class="material-symbols-outlined" title="Add to Notes">note_add</span>
+                <span class="material-symbols-outlined" title="Add to Notes" @click="addNoteToNotes">note_add</span>
                 <span class="material-symbols-outlined" title="Set Category">drive_file_move</span>
                 <span class="material-symbols-outlined group" title="Labels">label</span>
                 <span class="material-symbols-outlined group2" title="Previous mail" @click="goTo('prevEmailId')">chevron_left</span>
@@ -62,8 +62,8 @@ export default {
     methods: {
         loadEmail() {
             const { emailId } = this.$route.params
-            if(!emailId) return
-            
+            if (!emailId) return
+
             emailService
                 .get(emailId)
                 .then(email => {
@@ -81,7 +81,16 @@ export default {
         },
         goTo(emailId) {
             this.$router.push('/email/details/' + this.email[emailId])
-        }
+        },
+        addNoteToNotes() {
+            const noteTitle = this.email.subject
+            const noteText = this.email.body
+            const queryParams = {
+                title: noteTitle,
+                text: noteText
+            }
+            this.$router.push({ path: '/note/add', query: queryParams })
+        },
     },
 
     watch: {

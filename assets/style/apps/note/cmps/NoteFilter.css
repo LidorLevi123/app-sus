@@ -1,33 +1,49 @@
 .note-filter {
-    position: fixed;
-    top: 33px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 600px;
-    margin-bottom: 30px;
-    z-index: 9999;
-  }
-  
-  .search-filter {
-    flex-grow: 1;
-    max-height: 30px;
-    min-width: 200px;
-    border-radius: 20px;
-  }
-  
-  .select-container {
+  position: fixed;
+  top: 33px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+  z-index: 9999;
+}
+
+.search-filter {
+  flex-grow: 1;
+  max-height: 30px;
+  min-width: 200px;
+  border-radius: 20px;
+}
+
+.select-container {
+  position: absolute;
+  top: 30%;
+  right: 9px;
+  transform: translateY(-50%);
+}
+
+.select-filter {
+  padding: 0 8px;
+  max-height: 20px;
+  margin-top: 15px;
+  width: 100px;
+  border-radius: 20px;
+  font-size: 10px;
+}
+
+@media (max-width: 1000px) {
+  .note-filter {
     position: absolute;
-    top: 30%;
-    right: 9px;
-    transform: translateY(-50%);
+    left: 40%;
+    max-width: 300px;
   }
-  
-  .select-filter {
-    padding: 0 8px;
-    max-height: 20px;
-    margin-top: 15px;
-    width: 100px;
-    border-radius: 20px;
-    font-size: 10px;
+}
+
+@media (max-width: 720px) {
+  .note-filter {
+    margin-top: 80px;
+    left: 50%;
+    max-width: 300px;
   }
+}
