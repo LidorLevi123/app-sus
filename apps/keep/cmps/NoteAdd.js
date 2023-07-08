@@ -45,6 +45,15 @@ export default {
             audioUrl: '',
         }
     },
+    created() {
+        const { title, text } = this.$route.query
+        if (title && text) {
+          this.title = title
+          this.text = text
+          this.setNoteType('text')
+          this.$router.push('/note')
+        }
+      },
 
     computed: {
         isTextNote() {
