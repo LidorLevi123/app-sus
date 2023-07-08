@@ -1,8 +1,15 @@
 .email-filter {
     position: relative;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 0)
+}
+
+.email-filter .filter-menu {
+    display: block;
+    scale: 1.4;
+    margin-inline-start: 0.2em;
 }
 
 .email-filter input {
@@ -39,4 +46,10 @@
     opacity: 0.4;
     width: 30px;
     height: 30px;
+}
+
+@media (min-width: 720px) {
+    .email-filter .filter-menu {
+        display: none;
+    }
 }

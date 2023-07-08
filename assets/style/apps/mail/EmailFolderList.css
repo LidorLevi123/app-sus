@@ -1,6 +1,22 @@
 .email-folder-list {
-    border: 1px solid rgb(211, 211, 211);
-    padding: 0;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 200px;
+    height: 100vh;
+    background-color: #f0f0f0;
+    z-index: 1;
+    
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.5);
+    
+    transition: left 0.3s ease-out;
+}
+
+body.menu-open .email-folder-list {
+    left: 0
 }
 
 .email-folder-list ul li {
@@ -11,27 +27,37 @@
     transition: .2s;
 }
 
-.email-folder-list ul li > *:first-child {
+.email-folder-list ul li>*:first-child {
     margin-inline-end: 0.5em;
 }
 
-.email-folder-list ul li > *:last-child {
+.email-folder-list ul li>*:last-child {
     margin-inline-start: auto;
 }
 
-.email-folder-list ul li span{
+.email-folder-list ul li span {
     font-size: 1rem;
     font-weight: normal;
 }
 
-.email-folder-list ul li h4{
+.email-folder-list ul li h4 {
     margin: 0;
 }
 
 .email-folder-list ul li:hover {
-    background-color: var(--secondary-clr9);
+    background-color: var(--secondary-clr8);
 }
 
 .email-folder-list ul li.active {
-    background-color: var(--secondary-clr9);
+    background-color: var(--secondary-clr8);
+}
+
+@media (min-width: 720px) {
+    .email-folder-list {
+        height: auto;
+        width: auto;
+        position: static;
+        border: 1px solid rgb(211, 211, 211);
+        padding: 0;
+    }
 }

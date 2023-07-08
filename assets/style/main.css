@@ -10,6 +10,7 @@
 @import './../../lib/animate.css';
 
 /* Components */
+@import 'cmps/BackDrop.css';
 @import 'cmps/UserMsg.css';
 @import 'cmps/HomePage.css';
 @import 'cmps/AppHeader.css';
