@@ -1,0 +1,49 @@
+.book-list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.6em;
+    padding: 10px;
+}
+
+.book-list ul li {
+    padding: 10px;
+    background-color: var(--clr3);
+    
+    border: 1px solid black;
+    border-radius: 0.5em;
+
+    box-shadow: 1px 1px 4px rgba(70, 70, 70, 0.4);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.book-list ul li:hover {
+    scale: 1.02;
+}
+
+.book-list .actions {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+}
+
+.book-list .actions > * {
+    background: red;
+    border-radius: 50%;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity .1s;
+}
+
+.book-list .btn-remove {
+    margin-inline-end: .3em;
+    background: red;
+}
+
+.book-list .btn-edit {
+    background: rgb(0, 181, 0);
+}
+
+.book-list ul li:hover .actions > * {
+    opacity: 1;
+}

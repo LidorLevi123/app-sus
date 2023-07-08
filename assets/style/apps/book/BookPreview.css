@@ -1,0 +1,16 @@
+.book-preview {
+    position: relative;
+    display: grid;
+    height: 100%;
+}
+
+.book-preview > *:last-child {
+    place-self: end;
+}
+
+.book-preview > .img-sale {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 60px;
+}

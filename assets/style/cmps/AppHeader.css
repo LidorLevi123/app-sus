@@ -31,7 +31,15 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.app-header nav > * {
+.app-header nav .group {
+  margin-inline-end: auto;
+}
+
+.app-header nav > *:not(:last-child) {
+  margin-right: 0.6em;
+}
+
+.app-header div:last-child nav > *:last-child {
   margin-right: 0.6em;
 }
 

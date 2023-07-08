@@ -1,0 +1,89 @@
+.book-details {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+
+    padding: 10px;
+    background-color: var(--thistle);
+}
+
+.book-details .details {
+    position: relative;
+}
+
+.book-details > img {
+    width: 100%;
+}
+
+.book-details > * {
+    border-radius: .5em;
+    box-shadow: 0 0 8px var(--clr2);
+    padding: 1em;
+    background-color: var(--clr2);
+    color: var(--clr1);
+}
+
+.book-details > img {
+    background-color: var(--clr3);
+}
+
+.book-details > .price {
+    background-color: var(--clr1);
+}
+
+.book-details .details h1 {
+    padding-inline-end: 3em;
+    font-size: 2em;
+    text-shadow: 0px 0px 6px white;
+}
+
+.book-details .details h2 {
+    margin-block-start: 1.1em;
+}
+
+.book-details .details h3 {
+    text-shadow: 0px 0px 10px #cfa76c;
+}
+
+.book-details .details p {
+    font-size: 1.2em;
+}
+
+.book-details .price {
+    display: flex;
+    align-items: end;
+    text-shadow: 0px 0px 3px black;
+    font-size: 1.2em;
+}
+
+.book-details .details img {
+    position: absolute;
+    top: 1px;
+    right: 0px;
+
+    width: 100px;
+}
+
+.book-details .book-paging {
+    position: absolute;
+    bottom: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+
+    color: whitesmoke;
+}
+
+.book-details .price .red {
+    color: red;
+}
+
+.book-details .price .green {
+    color: rgb(0, 206, 0);
+}
+
+.book-details .price .orange {
+    color: orange;
+}

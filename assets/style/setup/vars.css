@@ -4,10 +4,15 @@
   --clr3: #2f2f2f;
   --clr4: #d4d0ce6c;
   --clr5: #d1cdcd;
-  
+
   --secondary-clr5: #0b57d0;
   --secondary-clr6: #c2dbff;
   --secondary-clr7: #DFD7BF;
   --secondary-clr8: #F2EAD3;
   --secondary-clr9: #f3f0eb;
-} 
+
+  --tertiary-clr1: #310d03;
+  --tertiary-clr2: #C38154;
+  --tertiary-clr3: #FFC26F;
+  --tertiary-clr4: #F9E0BB;
+}

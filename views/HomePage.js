@@ -20,7 +20,7 @@ export default {
                     <p>Organize your notes</p>
                 </article>
 
-                <article @click="goTo('/books')">
+                <article @click="goTo('/book')">
                     <h2>Books</h2>
                     <img src="assets/img/book-stack.png" alt="book-stack.png">
                     <p>Browse your books</p>

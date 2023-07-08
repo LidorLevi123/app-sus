@@ -37,3 +37,12 @@
 @import 'apps/note//cmps/NoteAdd.css';
 @import 'apps/note//cmps/NoteMap.css';
 @import 'apps/note//cmps/NotAudio.css';
+
+/* Apps-Books */
+@import 'apps/book/BookIndex.css';
+@import 'apps/book/BookList.css';
+@import 'apps/book/BookPreview.css';
+@import 'apps/book/BookDetails.css';
+@import 'apps/book/BookFilter.css';
+@import 'apps/book/BookEdit.css';
+@import 'apps/book/AddReview.css';
