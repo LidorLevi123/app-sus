@@ -2,7 +2,7 @@ export default {
 	template: `
   <header class="app-header main-layout">
     <div class="left-section">
-    <img class="logo-img" src="assets/img/logo.png" alt="">
+    <img class="logo-img" src="assets/img/logo.png" alt="logo.png" @click="goTo('/')">
     </div>
     <div class="right-section">
       <nav>
@@ -14,4 +14,10 @@ export default {
     </div>
   </header>
     `,
+
+    methods: {
+      goTo(route) {
+        this.$router.push(route)
+      }
+    }
 }
