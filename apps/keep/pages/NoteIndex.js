@@ -8,7 +8,7 @@ import NoteMap from '../cmps/NoteMap.js'
 import { utilService } from '../../../services/util.service.js'
 import NoteEdit from './NoteEdit.js'
 import NoteDetails from './NoteDetails.js'
-
+import NoteAudio from '../cmps/NoteAudio.js'
 
 import NoteFilter from '../cmps/NoteFilter.js'
 import NoteList from '../cmps/NoteList.js'
@@ -53,6 +53,7 @@ export default {
         NoteVideo,
         NoteMap,
         NoteDetails,
+        NoteAudio
 
 
     },

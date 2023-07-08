@@ -16,7 +16,7 @@ export default {
             </article>
             
 
-            <article @click="goTo('/keep')">
+            <article @click="goTo('/note')">
             <h2>Notes</h2>
             <img src="assets/img/essay.png" alt="essay.png">
             <p>Organize your notes</p>

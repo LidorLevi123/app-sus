@@ -4,7 +4,7 @@ import NoteImg from '../cmps/NoteImg.js'
 import NoteVideo from '../cmps/NoteVideo.js'
 import NoteMap from '../cmps/NoteMap.js'
 import NoteTodos from '../cmps/NoteTodos.js'
-import NoteCanvas from '../cmps/NoteCanvas.js'
+import NoteAudio from '../cmps/NoteAudio.js'
 
 export default {
     name: 'Details',
@@ -45,7 +45,7 @@ export default {
         NoteVideo,
         NoteMap,
         NoteTodos,
-        NoteCanvas
+        NoteAudio
     },
     data() {
         return {
@@ -96,8 +96,8 @@ export default {
                     return NoteMap
                 case 'NoteTodos':
                     return NoteTodos
-                case 'NoteCanvas':
-                    return NoteCanvas
+                case 'NoteAudio':
+                    return NoteAudio
                 default:
                     return null
             }

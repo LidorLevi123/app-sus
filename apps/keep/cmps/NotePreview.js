@@ -4,7 +4,7 @@ import NoteTodos from "./NoteTodos.js"
 import NoteAdd from "./NoteAdd.js"
 import NoteVideo from "./NoteVideo.js"
 import NoteMap from "./NoteMap.js"
-import NoteCanvas from "./NoteCanvas.js"
+import NoteAudio from "./NoteAudio.js"
 import NoteDetails from "../pages/NoteDetails.js"
 
 export default {
@@ -49,7 +49,7 @@ export default {
     NoteAdd,
     NoteVideo,
     NoteMap,
-    NoteCanvas,
+    NoteAudio,
     NoteDetails
   },
   data() {
@@ -108,8 +108,8 @@ export default {
           return NoteVideo
         case 'NoteMap':
           return NoteMap
-        case 'NoteCanvas':
-          return NoteCanvas
+        case 'NoteAudio':
+          return NoteAudio
         default:
           return null
       }

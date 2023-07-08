@@ -189,6 +189,7 @@ function _createNotes() {
                     backgroundColor: utilService.getRandomColor()
                 }
             },
+
             
         ]
         utilService.saveToStorage(NOTE_KEY, notes)
