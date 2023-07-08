@@ -78,7 +78,6 @@ export default {
                 .get(noteId)
                 .then((note) => {
                     this.noteData = note
-                    console.log(note)
                 })
                 .catch((error) => {
                     console.error('Error fetching note data:', error)

@@ -90,7 +90,6 @@ export default {
                             const audioBlob = new Blob(audioChunks)
                             const audioUrl = URL.createObjectURL(audioBlob)
                             this.audioUrl = audioUrl
-                            console.log(audioUrl)
 
                             const note = this.createAudioNote()
                             this.$emit('addNote', note)
@@ -101,7 +100,6 @@ export default {
 
                         setTimeout(() => {
                             mediaRecorder.stop()
-                            console.log('stopped recording')
                         }, 3000)
                     })
                     .catch((error) => {
@@ -156,7 +154,6 @@ export default {
             }
         },
         createImgNote() {
-            console.log(this.imgUrl)
             return {
                 id: '',
                 type: 'NoteImg',
