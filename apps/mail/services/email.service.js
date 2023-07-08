@@ -175,7 +175,7 @@ function _addEmailDemoData(email) {
     email.body = messages[randomSubjectMsgIdx]
     email.type = types[randomTypeIdx]
     email.category = categories[randomCategoryIdx]
-    email.isRead = false
+    email.isRead = utilService.getRandomIntInclusive(0, 1) === 0 ? true : false
     email.sentAt = new Date(utilService.getRandomIntInclusive(new Date('2020').getTime(), new Date('2023').getTime())).getTime()
     if(email.type === 'sent') email.isRead = true
 }

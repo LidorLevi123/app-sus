@@ -31,19 +31,28 @@ export default {
 
     computed: {
         filteredEmails() {
-            if (!this.filterBy) return this.emails
-            const regex = new RegExp(this.filterBy.subject, 'i')
-
-            let emails = this.emails.filter(email => regex.test(email.subject))
-
-            if(this.filterBy.type !== undefined || this.filterBy.category !== undefined) {
-                emails = emails.filter(email =>
-                    email.type.includes(this.filterBy.type) &&
-                    email.category.includes(this.filterBy.category))
-            }
             
-            if (this.filterBy.isRead !== null) {
-                return this.emails.filter(email => email.isRead === this.filterBy.isRead)
+            if (!this.filterBy || (!this.filterBy.type && !this.filterBy.category && this.filterBy.isRead === null)) {
+                return this.emails
+            }
+
+            let emails = []
+
+            if(this.filterBy.subject) {
+                const regex = new RegExp(this.filterBy.subject, 'i')
+                emails = this.emails.filter(email => regex.test(email.subject) || regex.test(email.body) || regex.test(email.from))
+                return emails
+            }
+
+            if (this.filterBy.isRead !== undefined && this.filterBy.isRead !== null) {
+                emails = this.emails.filter(email =>
+                email.isRead === this.filterBy.isRead)
+
+            } else if (this.filterBy.category) {
+                emails = this.emails.filter(email => email.category === this.filterBy.category)
+                
+            } else if(this.filterBy.type) {
+                emails = this.emails.filter(email => email.type === this.filterBy.type)
             }
 
             return emails
@@ -63,7 +72,6 @@ export default {
             this.pageInfo = {
                 startIdx,
                 endIdx,
-
             }
         },
         setFilterBy(filterBy) {
