@@ -9,7 +9,7 @@ export default {
                 <span @click="this.$router.push('/email')" class="material-symbols-outlined" title="Back">arrow_back</span>
                 <span class="material-symbols-outlined group" @click="showMsg('Mail reported as spam')" title="Report spam">report</span>
                 <span class="material-symbols-outlined" @click="showMsg('Mail moved to trash')" title="Delete">delete</span>
-                <span class="material-symbols-outlined" title="Mark as Unread">mail</span>
+                <span class="material-symbols-outlined" @click="onMarkUnread" title="Mark as Unread">mail</span>
                 <span class="material-symbols-outlined group" title="Schedule">schedule</span>
                 <span class="material-symbols-outlined" title="Add to Notes" @click="addNoteToNotes">note_add</span>
                 <span class="material-symbols-outlined" title="Set Category">drive_file_move</span>
@@ -83,6 +83,11 @@ export default {
         },
         onReply() {
             this.$emit('reply', this.$route.params.emailId)
+        },
+        onMarkUnread() {
+            this.email.isRead = false
+            emailService.save(this.email)
+            showSuccessMsg('Mail marked as Unread')
         },
         goTo(emailId) {
             this.$router.push('/email/details/' + this.email[emailId])

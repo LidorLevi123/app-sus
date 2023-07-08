@@ -99,7 +99,6 @@ export default {
             // console.log(emailCountMap)
         },
         replyEmail(emailId) {
-            console.log(emailId);
             this.isComposeClicked = true
         }
     },
