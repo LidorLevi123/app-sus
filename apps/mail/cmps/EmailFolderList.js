@@ -60,7 +60,6 @@ export default {
             this.filterBy[key] = value
             this.$emit('filter', this.filterBy)
             this.$router.push('/email')
-            console.log(this.filterBy);
         },
         resetFilterBy() {
             this.filterBy = { type: '/', category: '', isRead: null }
