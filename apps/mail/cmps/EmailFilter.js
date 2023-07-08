@@ -1,4 +1,6 @@
 export default {
+    props: ['pageInfo'],
+    
     template: `
         <section class="email-filter">
             <input type="text" placeholder="Search Emails" v-model="filterBy.subject">

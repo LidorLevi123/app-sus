@@ -13,7 +13,7 @@ export default {
             <textarea v-model="emailToEdit.body" type="text"></textarea>
             <section class="actions">
                 <button class="btn-send" :disabled="!isValid">Send</button>
-                <span class="material-symbols-outlined">delete</span>
+                <span class="material-symbols-outlined" title="Delete Text">delete</span>
             </section>
         </form>
     `,
@@ -28,7 +28,7 @@ export default {
         isValid() {
             return this.emailToEdit.subject.length > 0 &&
                 this.emailToEdit.to.length > 0
-        }
+        },
     },
 
     created() {
@@ -49,10 +49,11 @@ export default {
         sendEmail() {
             this.emailToEdit.type = 'sent'
             this.emailToEdit.sentAt = Date.now()
+            showSuccessMsg('Sending...')
             
             emailService.save(this.emailToEdit)
                 .then(savedEmail => {
-                    showSuccessMsg('Email sent!')
+                    showSuccessMsg('Email sent')
                     this.$emit('closeWindow', savedEmail)
                 })
                 .catch(err => {

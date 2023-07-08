@@ -1,5 +1,6 @@
 import { utilService } from '../../../services/util.service.js'
 import { emailService } from '../services/email.service.js'
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
 
 export default {
     props: ['email'],
@@ -23,8 +24,8 @@ export default {
 
             <span v-show="isHovered" class="actions-right">
                 <span @click="onDeleteEmail($event, email)" class="material-symbols-outlined delete" title="Delete">delete</span>
-                <span @click="onMarkRead" v-show="isEmailRead" class="material-symbols-outlined" title="Mark as Unread">mail</span>
-                <span @click="onMarkRead" v-show="!isEmailRead" class="material-symbols-outlined" title="Mark as Read">drafts</span>
+                <span @click="onToggleRead" v-show="isEmailRead" class="material-symbols-outlined" title="Mark as Unread">mail</span>
+                <span @click="onToggleRead" v-show="!isEmailRead" class="material-symbols-outlined" title="Mark as Read">drafts</span>
             </span>
         </article>
     `,
@@ -88,7 +89,7 @@ export default {
             this.email.category = this.email.category !== 'starred' ? 'starred' : ''
             emailService.save(this.email)
         },
-        onMarkRead(ev) {
+        onToggleRead(ev) {
             ev.stopPropagation()
             this.email.isRead = !this.email.isRead
         },

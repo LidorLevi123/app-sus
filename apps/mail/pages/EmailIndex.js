@@ -10,10 +10,10 @@ export default {
     template: `
         <section class="email-index main-layout">
             <button @click="isComposeClicked = true"><span class="material-symbols-outlined">edit</span>Compose</button>
-            <EmailFilter @filter="setFilterBy" @change-page="changePage" :currPageIdx="currPageIdx"/>
-            <EmailFolderList @filter="setFilterBy" :emails="emails"/>
+            <EmailFilter @filter="setFilterBy" @change-page="changePage" :pageInfo="pageInfo"/>
+            <EmailFolderList @filter="setFilterBy" @mail-count="updatePageInfo" :emails="emails"/>
             <EmailEdit v-if="isComposeClicked" @closeWindow="toggleEmailAddWindow"/>
-            <RouterView @delete="deleteEmail" :emails="filteredEmails"/>
+            <RouterView @reply='replyEmail' @delete="deleteEmail" :emails="filteredEmails"/>
         </section>
     `,
 
@@ -24,6 +24,7 @@ export default {
             emailsPerPage: 14,
             filterBy: null,
             isComposeClicked: false,
+            pageInfo: {}
         }
     },
 
@@ -40,7 +41,6 @@ export default {
                     email.category.includes(this.filterBy.category))
             }
             
-            console.log(emails)
             if (this.filterBy.isRead !== null) {
                 return this.emails.filter(email => email.isRead === this.filterBy.isRead)
             }
@@ -59,6 +59,11 @@ export default {
             let endIdx = startIdx + this.emailsPerPage
 
             this.emails = this.emails.slice(startIdx, endIdx)
+            this.pageInfo = {
+                startIdx,
+                endIdx,
+
+            }
         },
         setFilterBy(filterBy) {
             this.filterBy = filterBy
@@ -89,6 +94,12 @@ export default {
 
             this.currPageIdx += diff
             this.loadEmails()
+        },
+        updatePageInfo(emailCountMap) {
+            // console.log(emailCountMap)
+        },
+        replyEmail(emailId) {
+            this.isComposeClicked = true
         }
     },
 

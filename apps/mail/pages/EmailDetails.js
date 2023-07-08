@@ -1,4 +1,5 @@
 import { emailService } from '../services/email.service.js'
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
 
 export default {
     template: `
@@ -6,9 +7,9 @@ export default {
 
             <section class="actions">
                 <span @click="this.$router.push('/email')" class="material-symbols-outlined" title="Back">arrow_back</span>
-                <span class="material-symbols-outlined group" title="Report spam">report</span>
-                <span class="material-symbols-outlined" title="Delete">delete</span>
-                <span class="material-symbols-outlined" title="Mark as Unread">mail</span>
+                <span class="material-symbols-outlined group" @click="showMsg('Mail reported as spam')" title="Report spam">report</span>
+                <span class="material-symbols-outlined" @click="showMsg('Mail moved to trash')" title="Delete">delete</span>
+                <span class="material-symbols-outlined" @click="onMarkUnread" title="Mark as Unread">mail</span>
                 <span class="material-symbols-outlined group" title="Schedule">schedule</span>
                 <span class="material-symbols-outlined" title="Add to Notes" @click="addNoteToNotes">note_add</span>
                 <span class="material-symbols-outlined" title="Set Category">drive_file_move</span>
@@ -28,7 +29,7 @@ export default {
                 <div>
                     <span>{{ emailDate }}</span>
                     <span class="material-symbols-outlined star" title="Mark as Favorite" @click="onStarEmail">star</span>
-                    <span class="material-symbols-outlined" title="Reply">reply</span>
+                    <span class="material-symbols-outlined" title="Reply" @click="onReply">reply</span>
                 </div>
             </div>
 
@@ -77,7 +78,16 @@ export default {
         },
         onStarEmail() {
             this.email.category = this.email.category !== 'starred' ? 'starred' : ''
+            showMsg('Mail marked as favorite')
             emailService.save(this.email)
+        },
+        onReply() {
+            this.$emit('reply', this.$route.params.emailId)
+        },
+        onMarkUnread() {
+            this.email.isRead = false
+            emailService.save(this.email)
+            showSuccessMsg('Mail marked as Unread')
         },
         goTo(emailId) {
             this.$router.push('/email/details/' + this.email[emailId])
@@ -90,6 +100,9 @@ export default {
                 text: noteText
             }
             this.$router.push({ path: '/note/add', query: queryParams })
+        },
+        showMsg(msg) {
+            showSuccessMsg(msg)
         },
     },
 

@@ -79,6 +79,7 @@ export default {
         emails: {
             handler() {
                 this.loadCountMap()
+                this.$emit('mail-count', this.emailCountMap)
             },
             deep: true,
         },

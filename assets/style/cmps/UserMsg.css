@@ -1,17 +1,37 @@
 .user-msg {
     position: fixed;
-    top: 40px;
-    right: 20px;
+    bottom: 50px;
+    left: 20px;
 
-    width: 290px;
-    background-color: rgb(208, 206, 139);
-    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 1.2rem;
+    font-family: sans-serif;
+
+    background-color: white;
+    color: var(--clr3);
+    padding: 1em;
     border-radius: 5px;
-    /* transition: opacity 1s; */
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
 }
-.user-msg.success {
-    background-color: rgb(88, 130, 88);
-}
+
+.user-msg > *:not(:first-child) {
+    cursor: pointer;
+
+}   
 .user-msg.error {
     background-color: rgb(187, 104, 104);
+}
+
+.user-msg button {
+    background: none;
+    border: none;
+    color: var(--secondary-clr5);
+    font-weight: bold;
+    margin-inline: 2em;
+}
+
+.user-msg span {
+    font-size: 19px;
 }
