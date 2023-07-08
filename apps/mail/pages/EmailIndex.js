@@ -11,7 +11,7 @@ export default {
         <section class="email-index main-layout">
             <button @click="isComposeClicked = true"><span class="material-symbols-outlined">edit</span>Compose</button>
             <EmailFilter @filter="setFilterBy" @change-page="changePage" :currPageIdx="currPageIdx"/>
-            <EmailFolderList @filter="setFilterBy"/>
+            <EmailFolderList @filter="setFilterBy" :emails="emails"/>
             <EmailEdit v-if="isComposeClicked" @closeWindow="toggleEmailAddWindow"/>
             <RouterView @delete="deleteEmail" :emails="filteredEmails"/>
         </section>
@@ -21,7 +21,7 @@ export default {
         return {
             emails: [],
             currPageIdx: 0,
-            emailsPerPage: 13,
+            emailsPerPage: 14,
             filterBy: null,
             isComposeClicked: false,
         }
