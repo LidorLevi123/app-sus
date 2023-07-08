@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       showMenu: false
-    };
+    }
   },
   methods: {
     goTo(route) {
