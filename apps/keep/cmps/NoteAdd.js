@@ -93,7 +93,7 @@ export default {
                         setTimeout(() => {
                             mediaRecorder.stop()
                             console.log('stopped recording')
-                        }, 1000)
+                        }, 3000)
                     })
                     .catch((error) => {
                         console.error("Error recording audio:", error)

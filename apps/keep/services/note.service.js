@@ -189,7 +189,18 @@ function _createNotes() {
                     backgroundColor: utilService.getRandomColor()
                 }
             },
-
+            {
+                id: 'n203',
+                type: 'NoteAudio',
+                isPinned: true,
+                info: {
+                    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav",
+                    title: '✰to the stars✰'
+                },
+                style: {
+                    backgroundColor: utilService.getRandomColor()
+                }
+            },
             
         ]
         utilService.saveToStorage(NOTE_KEY, notes)
