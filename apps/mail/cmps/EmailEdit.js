@@ -1,4 +1,5 @@
 import { emailService } from "../../mail/services/email.service.js"
+import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
 
 export default {
     template: `
@@ -51,11 +52,11 @@ export default {
             
             emailService.save(this.emailToEdit)
                 .then(savedEmail => {
-                    // showSuccessMsg('email sent!')
+                    showSuccessMsg('Email sent!')
                     this.$emit('closeWindow', savedEmail)
                 })
                 .catch(err => {
-                    // showErrorMsg('Cannot save email')
+                    showErrorMsg('Cannot send email')
                 })
         },
         closeWindow() {

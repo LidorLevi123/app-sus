@@ -32,15 +32,19 @@ export default {
             if (!this.filterBy) return this.emails
             const regex = new RegExp(this.filterBy.subject, 'i')
 
-            const emails =
-                    this.emails.filter(email => regex.test(email.subject) &&
+            let emails = this.emails.filter(email => regex.test(email.subject))
+
+            if(this.filterBy.type !== undefined || this.filterBy.category !== undefined) {
+                emails = emails.filter(email =>
                     email.type.includes(this.filterBy.type) &&
                     email.category.includes(this.filterBy.category))
-
-            if(this.filterBy.isRead !== null) {
-                return this.emails.filter(email => email.isRead === this.filterBy.isRead)
             }
             
+            console.log(emails)
+            if (this.filterBy.isRead !== null) {
+                return this.emails.filter(email => email.isRead === this.filterBy.isRead)
+            }
+
             return emails
         },
     },
@@ -53,7 +57,7 @@ export default {
         setEmailPaging() {
             let startIdx = this.currPageIdx * this.emailsPerPage
             let endIdx = startIdx + this.emailsPerPage
-            
+
             this.emails = this.emails.slice(startIdx, endIdx)
         },
         setFilterBy(filterBy) {
@@ -74,13 +78,15 @@ export default {
             }
         },
         toggleEmailAddWindow(emailToEdit) {
-            if (emailToEdit) this.emails.unshift(emailToEdit)
+            if (emailToEdit) {
+                this.emails.unshift(emailToEdit)
+            }
             this.isComposeClicked = !this.isComposeClicked
         },
         changePage(diff) {
-            if(diff === -1 && this.currPageIdx === 0) return
-            if(diff === 1 && this.currPageIdx === Math.ceil(this.emails.length / this.emailsPerPage)) return
-            
+            if (diff === -1 && this.currPageIdx === 0) return
+            if (diff === 1 && this.currPageIdx === Math.ceil(this.emails.length / this.emailsPerPage)) return
+
             this.currPageIdx += diff
             this.loadEmails()
         }
