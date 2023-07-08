@@ -56,6 +56,7 @@ export default {
 
     methods: {
         onSetFilterBy(key, value) {
+            this.closeMenu()
             this.resetFilterBy()
             this.filterBy[key] = value
             this.$emit('filter', this.filterBy)
@@ -72,6 +73,9 @@ export default {
             return {
                 active: this.filterBy[key] === value
             }
+        },
+        closeMenu() {
+            document.body.classList.remove('menu-open')
         }
     },
 
