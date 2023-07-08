@@ -1,5 +1,5 @@
 import { noteService } from '../services/note.service.js'
-import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
+import { showSuccessMsg, showErrorMsg, eventBus } from '../../../services/event-bus.service.js'
 import NotePreview from '../cmps/NotePreview.js'
 import NoteTxt from '../cmps/NoteTxt.js'
 import NoteAdd from '../cmps/NoteAdd.js'
@@ -8,42 +8,40 @@ import NoteMap from '../cmps/NoteMap.js'
 import { utilService } from '../../../services/util.service.js'
 import NoteEdit from './NoteEdit.js'
 import NoteDetails from './NoteDetails.js'
+import NoteAudio from '../cmps/NoteAudio.js'
 
 import NoteFilter from '../cmps/NoteFilter.js'
 import NoteList from '../cmps/NoteList.js'
 
 export default {
+    name: 'index',
     template: `
-<div class="notes-index">
-    
-  <div class="inputs">
-    <div class="notes-filter">
-    <RouterView></RouterView>
-    <NoteFilter @filter="setFilterBy" />
-    </div>
-    <div class="add-note-section">
-    <NoteAdd @addNote="addNote" v-if="!isEditing" />
-    <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
-    
-    </div>
-  </div>
-  <div class="note-container">
-    <li v-for="note in filteredNotes" :key="note.id">
-      <NotePreview
-        :note="note"
-        @deleteNote="deleteNote"
-        @changeColor="changeNoteColor"
-        @editNote="editNote"
-        @togglePinNote="togglePinNote"
-        @copyNote="copyNote"
-        @updateNoteLabel="updateNoteLabel"
-      />
-      
-    </li>
+    <div class="notes-index" >
 
-  </div>
-  
-  </div>
+      <div class="inputs">
+        <div class="notes-filter">
+          <RouterView></RouterView>
+          <NoteFilter @filter="setFilterBy" />
+        </div>
+        <div class="add-note-section">
+          <NoteAdd @addNote="addNote" v-if="!isEditing" />
+          <NoteEdit v-else :note="editingNote" @updateNote="updateNote" @cancelEdit="cancelEdit" />
+        </div>
+      </div>
+      <div class="note-container">
+        <li v-for="note in filteredNotes" :key="note.id">
+          <NotePreview
+            :note="note"
+            @deleteNote="deleteNote"
+            @changeColor="changeNoteColor"
+            @editNote="editNote"
+            @togglePinNote="togglePinNote"
+            @copyNote="copyNote"
+            @updateNoteLabel="updateNoteLabel"
+          />
+        </li>
+      </div>
+    </div>
 
     `,
     components: {
@@ -54,11 +52,14 @@ export default {
         NoteAdd,
         NoteVideo,
         NoteMap,
-        NoteDetails
+        NoteDetails,
+        NoteAudio
+
 
     },
     data() {
         return {
+
             notes: [],
             isEditing: false,
             editingNote: null,
@@ -71,7 +72,11 @@ export default {
     },
     created() {
         this.fetchNotes()
+        eventBus.on('dark-mode-toggled', this.toggleDarkMode)
     },
+    beforeDestroy() {
+        eventBus.off('dark-mode-toggled', this.toggleDarkMode)
+      },
     watch: {
         notes: {
             deep: true,
@@ -88,6 +93,9 @@ export default {
             const pinnedNotes = this.notes.filter((note) => note.isPinned)
             const unpinnedNotes = this.notes.filter((note) => !note.isPinned)
             return [...pinnedNotes, ...unpinnedNotes]
+        },
+        isDarkMode() {
+            return this.$eventBus.isDarkMode || false
         }
     },
     methods: {
@@ -160,7 +168,11 @@ export default {
                 showSuccessMsg('Note label updated successfully!')
                 this.fetchNotes()
             })
-        }
-
-    }
+        },
+        toggleDarkMode(isDarkMode) {
+            this.isDarkMode = isDarkMode
+          }
+    },
 }
+
+

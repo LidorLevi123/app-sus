@@ -7,6 +7,7 @@
 @import 'base/helpers.css';
 @import 'base/layout.css';
 @import 'base/forms.css';
+@import './../../lib/animate.css';
 
 /* Components */
 @import 'cmps/UserMsg.css';
@@ -35,3 +36,4 @@
 @import 'apps/note//cmps/NoteTodo.css';
 @import 'apps/note//cmps/NoteAdd.css';
 @import 'apps/note//cmps/NoteMap.css';
+@import 'apps/note//cmps/NotAudio.css';

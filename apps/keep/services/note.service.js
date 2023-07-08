@@ -140,7 +140,11 @@ function _createNotes() {
                     title: 'Get my stuff together',
                     todos: [
                         { txt: 'Driving license', doneAt: null },
-                        { txt: 'Coding power', doneAt: 187111111 }
+                        { txt: 'Coding power', doneAt: 187111111 },
+                        { txt: 'pick up the cat from school', doneAt: 197111111 },
+                        { txt: 'throw the trash to the garbage ', doneAt: null },
+                        { txt: 'dentist call the', doneAt: 297111111 },
+                        { txt: 'very funny joke HAHA', doneAt: null },
                     ]
                 },
                 style: {
@@ -180,6 +184,18 @@ function _createNotes() {
                 info: {
                     url: 'https://api.memegen.link/images/both/width_or_height/why_not_both~q.png',
                     title: 'Pain'
+                },
+                style: {
+                    backgroundColor: utilService.getRandomColor()
+                }
+            },
+            {
+                id: 'n203',
+                type: 'NoteAudio',
+                isPinned: true,
+                info: {
+                    audioUrl: "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav",
+                    title: '✰to the stars✰'
                 },
                 style: {
                     backgroundColor: utilService.getRandomColor()

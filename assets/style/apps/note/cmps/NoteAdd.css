@@ -78,3 +78,19 @@
     margin-bottom: 7px;
 }
 
+.record-audio-button{
+    right: 0;
+
+    display: flex;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    padding: 0;
+    cursor: pointer;
+
+    padding: 5px;
+    background-color: transparent;
+    cursor: pointer;
+}

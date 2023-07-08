@@ -13,7 +13,7 @@
     break-inside: avoid;
     page-break-inside: avoid;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-  }
+}
 
 .note-title {
     font-weight: bold;
@@ -49,6 +49,11 @@
 
 }
 
+.delete-button:hover {
+    animation: bounce;
+    animation-duration: 2s;
+}
+
 .color-span {
     display: flex;
     align-items: center;
@@ -59,6 +64,11 @@
     left: 50px;
 
     cursor: pointer;
+}
+
+.color-span:hover {
+    animation: jello;
+    animation-duration: 2s;
 }
 
 .pin-button {
@@ -111,6 +121,11 @@
     cursor: pointer;
 }
 
+.copy-button:hover {
+    animation: tada;
+    animation-duration: 2s;
+}
+
 .note-card:hover .note-toolbar {
     opacity: 1;
 }
@@ -147,12 +162,14 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-  }
-  
-  .label-menu {
+}
+
+.label-menu {
     position: absolute;
-    bottom: 0; /* Updated position to be above the note */
-    right: 60px; /* Positioned to the right */
+    bottom: 0;
+    /* Updated position to be above the note */
+    right: 60px;
+    /* Positioned to the right */
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -160,9 +177,9 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 4px;
-  }
+}
 
-  .label-option {
+.label-option {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,9 +189,9 @@
     padding: 4px;
     z-index: 1;
     cursor: pointer;
-  }
-  
-  .label-display {
+}
+
+.label-display {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -188,4 +205,12 @@
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
-  }
+}
+
+.label-selection-button span {
+    transition: transform 0.3s;
+}
+
+.label-selection-button:hover span {
+    transform: rotate(180deg);
+}

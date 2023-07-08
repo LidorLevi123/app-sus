@@ -29,3 +29,7 @@
     color: var(--secondary-clr7);
   }
 }
+
+.logo-img{
+  max-width: 80px;
+}

@@ -16,6 +16,8 @@ export default {
         <button title="Video Note" @click.prevent="setNoteType('video')" class="note-type-button"><span class="material-symbols-outlined">smart_display</span></button>
         <button title="Todo Note" @click.prevent="setNoteType('todos')" class="note-type-button"><span class="material-symbols-outlined">format_list_bulleted_add</span></button>
         <button title="Current Location Note" @click.prevent="createMapNote" class="note-type-button"><span class="material-symbols-outlined">place</span></button>
+        <button title="Record Audio" @click.prevent="recordAudio" class="record-audio-button"><span class="material-symbols-outlined">mic</span></button>
+        <!-- <button @click.prevent="addCanvasNote">Add Canvas Note</button> -->
       </div>
     </div>
   </div>
@@ -40,8 +42,10 @@ export default {
             videoUrl: '',
             todos: [],
             noteType: '',
+            audioUrl: '',
         }
     },
+
     computed: {
         isTextNote() {
             return this.noteType === 'text'
@@ -55,8 +59,50 @@ export default {
         isTodosNote() {
             return this.noteType === 'todos'
         },
+        isAudioNote() {
+            return this.noteType === 'audio'
+        },
+
     },
     methods: {
+        recordAudio() {
+            if (navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices
+                    .getUserMedia({ audio: true })
+                    .then((stream) => {
+                        const mediaRecorder = new MediaRecorder(stream)
+                        const audioChunks = []
+
+                        mediaRecorder.addEventListener("dataavailable", (event) => {
+                            audioChunks.push(event.data)
+                        })
+
+                        mediaRecorder.addEventListener("stop", () => {
+                            const audioBlob = new Blob(audioChunks)
+                            const audioUrl = URL.createObjectURL(audioBlob)
+                            this.audioUrl = audioUrl
+                            console.log(audioUrl)
+
+                            const note = this.createAudioNote()
+                            this.$emit('addNote', note)
+                            this.resetFields()
+                        })
+
+                        mediaRecorder.start()
+
+                        setTimeout(() => {
+                            mediaRecorder.stop()
+                            console.log('stopped recording')
+                        }, 3000)
+                    })
+                    .catch((error) => {
+                        console.error("Error recording audio:", error)
+                    })
+            } else {
+                console.error("getUserMedia not supported")
+            }
+        },
+
         setNoteType(type) {
             this.noteType = type
         },
@@ -74,6 +120,9 @@ export default {
                     break
                 case 'todos':
                     note = this.createTodosNote()
+                    break
+                case 'audio':
+                    note = this.createAudioNote()
                     break
                 default:
                     return
@@ -98,6 +147,7 @@ export default {
             }
         },
         createImgNote() {
+            console.log(this.imgUrl)
             return {
                 id: '',
                 type: 'NoteImg',
@@ -149,6 +199,7 @@ export default {
             this.videoUrl = ''
             this.todos = []
             this.noteType = ''
+            this.audioUrl = ''
         },
         createMapNote() {
             if (navigator.geolocation) {
@@ -181,5 +232,21 @@ export default {
                 console.error('Geolocation is not supported by this browser.')
             }
         },
+        createAudioNote() {
+            return {
+                id: '',
+                type: 'NoteAudio',
+                isPinned: false,
+                style: {
+                    backgroundColor: utilService.getRandomColor(),
+                },
+                info: {
+                    title: this.title,
+                    audioUrl: this.audioUrl,
+                },
+            }
+        },
+
+
     },
 }

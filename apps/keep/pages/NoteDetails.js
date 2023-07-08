@@ -4,6 +4,7 @@ import NoteImg from '../cmps/NoteImg.js'
 import NoteVideo from '../cmps/NoteVideo.js'
 import NoteMap from '../cmps/NoteMap.js'
 import NoteTodos from '../cmps/NoteTodos.js'
+import NoteAudio from '../cmps/NoteAudio.js'
 
 export default {
     name: 'Details',
@@ -43,7 +44,8 @@ export default {
         NoteImg,
         NoteVideo,
         NoteMap,
-        NoteTodos
+        NoteTodos,
+        NoteAudio
     },
     data() {
         return {
@@ -94,6 +96,8 @@ export default {
                     return NoteMap
                 case 'NoteTodos':
                     return NoteTodos
+                case 'NoteAudio':
+                    return NoteAudio
                 default:
                     return null
             }
@@ -163,7 +167,7 @@ export default {
         },
         beforeRouteEnter(to, from, next) {
             next((vm) => {
-                vm.fetchNoteData(); // Reload the note data
+                vm.fetchNoteData()
             })
         },
     }

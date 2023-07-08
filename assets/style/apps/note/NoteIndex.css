@@ -19,3 +19,19 @@ li {
     overflow: hidden;
     margin-bottom: 20px;
 }
+
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+  }
+  
+  .dark-mode-button {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
